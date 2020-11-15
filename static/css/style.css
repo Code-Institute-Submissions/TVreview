@@ -1,4 +1,37 @@
-.test {
-    color: red;
-    font-size: 100px;
+.section1 {
+    background-color: #14213D;
+}
+
+.custom-nav {
+    background-color: #000000;
+    font-family: 'Xanh Mono', monospace;
+    padding: 0px 10px;
+}
+
+.title {
+    font-family: 'Xanh Mono', monospace;
+    font-size: 60px;
+    color: #e5e5e5;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.custom-search {
+    display: flex;
+    margin: 0 auto;
+    width: 50%;
+    background-color: #fca311;
+    font-family: Arial;
+    color:#e5e5e5;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.custom-form {
+    width: 100%;
+}
+
+.search-margin {
+    margin: 20px 0px;
+    background-color: rgba(5, 5, 5, 0); 
 }
