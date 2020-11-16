@@ -1,6 +1,16 @@
+/*----------general----------*/
+
+.custom-text {
+    font-family: 'Xanh Mono', monospace;
+    color: #e5e5e5;
+}
+
 .section1 {
     background-color: #14213D;
 }
+
+
+/*--------------nav and title-------------------*/
 
 .custom-nav {
     background-color: #000000;
@@ -15,6 +25,9 @@
     text-align: center;
     padding-top: 5px;
 }
+
+
+/*-----------------------search--------------------*/
 
 .custom-search {
     display: flex;
