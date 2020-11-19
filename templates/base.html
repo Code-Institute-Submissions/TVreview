@@ -17,10 +17,10 @@
 <body>
     <nav class="custom-nav">
         <div class="nav-wrapper">
-        <a href="#" class="brand-logo custom-logo">Logo</a>
+        <a href="{{ url_for ('index') }}" class="brand-logo custom-logo">WtW</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">SignUp</a></li> 
+            <li><a href="{{ url_for ('index') }}">Home</a></li>
+            <li><a href="{{ url_for ('signUp') }}">SignUp</a></li> 
             <li><a href="#">Login</a></li>
         </ul>
         </div>

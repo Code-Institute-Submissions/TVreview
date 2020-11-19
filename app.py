@@ -1,7 +1,8 @@
 import os
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request, flash, session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
 
@@ -18,6 +19,27 @@ mongo = PyMongo(app)
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.route("/signup", methods=["GET", "POST"])
+def signUp():
+    if request.method == "POST":
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if existing_user:
+            flash("Username already exists")
+            redirect(url_for("signUp"))
+
+        signup = {
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password"))
+        }
+        mongo.db.users.insert_one(signup)
+
+        session["user"] = request.form.get("username").lower()
+        flash("Successfully Signed Up")
+    return render_template("signup.html")
 
 
 @app.route("/addshow")
@@ -37,6 +59,17 @@ def submitShow():
     tvshow = mongo.db.show
     tvshow.insert_one(show)
     return redirect(url_for("addShow"))
+
+
+@app.route('/tvshow')
+def tvShow():
+    tvshow = mongo.db.show
+    result = tvshow.find({}, {"_id": 0, "name": 1})
+    return render_template("tvshow.html", test=result)
+# @app.route('/tvshow/<show_id>')
+# def tvshow(show_id):
+    # show = mongo.db.find_one({'_id': ObjectId(show_id)})
+    # return render_template("tvshow.html", show=show)
 
 
 if __name__ == "__main__":
