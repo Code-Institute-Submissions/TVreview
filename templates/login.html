@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <div class="row">
     <h3 class="custom-text center col s6">Login</h3>
 </div>
 
-<div class="row container">
+<div class="row container" id="login">
     <form action = "{{ url_for ('login') }}" method = "POST" class="col s12">
         <div class="row">
             <div class="input-field col s6">
@@ -32,4 +33,5 @@
         <p class="custom-text">Haven't got an account yet?</p> <a href="{{ url_for('signUp') }}">Sign up</a>
     </div>
 </div>
+
 {% endblock %}

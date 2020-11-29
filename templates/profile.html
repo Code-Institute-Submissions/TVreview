@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+    <h5 class="custom-text center col s6">Welcome {{ username }}</h5>
+</div>
+<div class="row">
+    <button type="button"><a href="{{ url_for ('logout') }}">Logout</a></button>
+</div>
+
+{% endblock %}
