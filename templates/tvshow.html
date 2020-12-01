@@ -1,7 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% for y in test %}
-        {{ y }}
+    {% for y in showShow %}
+        <h1 class="custom-text">Name: {{ y.name }}</h1>
+        <h2 class="custom-text">Years: {{ y.years }}</h2>
+        <h3 class="custom-text">Seasons: {{ y.seasons }}</h3>
+        <h3 class="custom-text">Country: {{ y.country }}</h3>
+        <h3 class="custom-text">Synopsis: {{ y.synopsis }}</h3>
+    
+    {% for x in showReview %}
+        {% if x.review_for == y.name %}
+            <h3 class="custom-text">Reviews: {{ x.review }}</h3>
+        {% endif %}
     {% endfor %}
+
+    {% endfor %}
+
+    <!--add a review button if logged in-->
 {% endblock %}

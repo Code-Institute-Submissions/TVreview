@@ -12,10 +12,10 @@
       </form>
     </div>
 </nav>
-
-<div>
-    <a href="{{ url_for ('addShow') }}">Add a Tv Show</a>
-</div>
+    {% for y in test %}
+        <a href="{{ url_for('tvShow', show_id=y._id) }}" class="custom-text">{{ y.name }}</a>
+        
+    {% endfor %}
     
 
 {% endblock %}

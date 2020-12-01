@@ -19,7 +19,9 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    tvshow = mongo.db.show
+    result = tvshow.find()
+    return render_template("index.html", test=result)
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -70,7 +72,7 @@ def login():
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
-    #get user's username from database
+    # get user's username from database
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
 
@@ -85,6 +87,12 @@ def logout():
     session.pop("user")
     return redirect(url_for('login'))
 
+
+@app.route("/search/<searchterm>")
+def search(searchterm):
+    result = mongo.db.show.find_one(
+        {}
+    )
 
 @app.route("/addshow")
 def addShow():
@@ -105,15 +113,15 @@ def submitShow():
     return redirect(url_for("addShow"))
 
 
-@app.route('/tvshow')
-def tvShow():
+@app.route('/tvshow/<show_id>')
+def tvShow(show_id):
     tvshow = mongo.db.show
-    result = tvshow.find({}, {"_id": 0, "name": 1})
-    return render_template("tvshow.html", test=result)
-# @app.route('/tvshow/<show_id>')
-# def tvshow(show_id):
-    # show = mongo.db.find_one({'_id': ObjectId(show_id)})
-    # return render_template("tvshow.html", show=show)
+    result = tvshow.find_one({"_id": ObjectId(show_id)})
+    showShow = tvshow.find()
+    reviews = mongo.db.reviews
+    showReview = reviews.find()
+    return render_template(
+        "tvshow.html", test=result, showShow=showShow, showReview=showReview)
 
 
 if __name__ == "__main__":
