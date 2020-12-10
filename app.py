@@ -21,7 +21,7 @@ mongo = PyMongo(app)
 def index():
     tvshow = mongo.db.show
     result = tvshow.find()
-    return render_template("index.html", test=result)
+    return render_template("index.html", id=result)
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -113,15 +113,26 @@ def submitShow():
     return redirect(url_for("addShow"))
 
 
+@app.route('/addreview/<show_id>', methods=['GET', 'POST'])
+def addreview(show_id):
+    if request.method == "POST":
+        reviews = {
+            "review_for": show_id,
+            "review": request.form.get("review"),
+        }
+        review = mongo.db.reviews
+        review.insert_one(reviews)
+        return render_template("addreview.html")
+
+
 @app.route('/tvshow/<show_id>')
 def tvShow(show_id):
     tvshow = mongo.db.show
     result = tvshow.find_one({"_id": ObjectId(show_id)})
-    showShow = tvshow.find()
-    reviews = mongo.db.reviews
-    showReview = reviews.find()
+    review_coll = mongo.db.reviews
+    reviews = review_coll.find_one("review_id": show_id)
     return render_template(
-        "tvshow.html", test=result, showShow=showShow, showReview=showReview)
+        "tvshow.html", id=result, reviews=reviews)
 
 
 if __name__ == "__main__":

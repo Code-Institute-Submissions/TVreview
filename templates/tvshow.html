@@ -1,20 +1,50 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% for y in showShow %}
-        <h1 class="custom-text">Name: {{ y.name }}</h1>
-        <h2 class="custom-text">Years: {{ y.years }}</h2>
-        <h3 class="custom-text">Seasons: {{ y.seasons }}</h3>
-        <h3 class="custom-text">Country: {{ y.country }}</h3>
-        <h3 class="custom-text">Synopsis: {{ y.synopsis }}</h3>
+       
+        <h1 class="custom-text">Name: {{ id.name }}</h1>
+        <h2 class="custom-text">Years: {{ id.years }}</h2>
+        <h3 class="custom-text">Seasons: {{ id.seasons }}</h3>
+        <h3 class="custom-text">Country: {{ id.country }}</h3>
+        <h3 class="custom-text">Synopsis: {{ id.synopsis }}</h3>
     
-    {% for x in showReview %}
-        {% if x.review_for == y.name %}
-            <h3 class="custom-text">Reviews: {{ x.review }}</h3>
-        {% endif %}
-    {% endfor %}
 
+    Reviews: {{ reviews.review }}
+     
+
+    <!--{% if id._id == reviews.review_for %}-->
+    {% for y in reviews %}
+        <h3 class="custom-text">Reviews: {{ y.review }}</h3>
     {% endfor %}
+    <!--{% endif %}-->    
+
+
 
     <!--add a review button if logged in-->
+    <div class="row">
+        <div class="col s4"><h3 class="custom-text">Add a Review</h3></div>
+    </div>
+    <div class="row container">
+  
+        <h2 class="custom-text">Review for: {{ id.name }}</h2>
+
+    <form action = "{{ url_for('addreview', show_id=id._id) }}" method = "POST" class="col s12">
+
+       <div class="row">
+        <div class="input-field custom-text col s6">
+          <input id="review" type="text" class="validate custom-text" name="review">
+          <label for="review">Review</label>
+        </div>
+       </div> 
+       <div class="row">
+        <div class="input-field custom-text col s6">
+            <button class="btn waves-effect waves-light colour-yellow" type="submit">Submit
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+       </div>
+    </form>    
+      </div>
+      
+      
 {% endblock %}
