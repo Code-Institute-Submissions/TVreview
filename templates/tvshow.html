@@ -8,17 +8,11 @@
         <h3 class="custom-text">Country: {{ id.country }}</h3>
         <h3 class="custom-text">Synopsis: {{ id.synopsis }}</h3>
     
-
-    Reviews: {{ reviews.review }}
-     
-
-    <!--{% if id._id == reviews.review_for %}-->
-    {% for y in reviews %}
-        <h3 class="custom-text">Reviews: {{ y.review }}</h3>
+        <h3 class="custom-text">Reviews:</h3>
+    {% for x in reviews %}
+    <h5 class="custom-text">{{ x.review }}</h5>
+    <h6 class="custom-text">by: {{ x.review_by }}</h6>
     {% endfor %}
-    <!--{% endif %}-->    
-
-
 
     <!--add a review button if logged in-->
     <div class="row">

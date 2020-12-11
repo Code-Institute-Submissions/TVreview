@@ -119,6 +119,7 @@ def addreview(show_id):
         reviews = {
             "review_for": show_id,
             "review": request.form.get("review"),
+            "review_by": session["user"]
         }
         review = mongo.db.reviews
         review.insert_one(reviews)
@@ -130,7 +131,8 @@ def tvShow(show_id):
     tvshow = mongo.db.show
     result = tvshow.find_one({"_id": ObjectId(show_id)})
     review_coll = mongo.db.reviews
-    reviews = review_coll.find_one("review_id": show_id)
+    review_query = {"review_for": show_id}
+    reviews = review_coll.find(review_query)
     return render_template(
         "tvshow.html", id=result, reviews=reviews)
 
