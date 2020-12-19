@@ -17,11 +17,34 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
+    # search = request.form.get("search")
+    # if request.method == 'POST':
+
+    #    return search_results(search)
+
     tvshow = mongo.db.show
     result = tvshow.find()
-    return render_template("index.html", id=result)
+    return render_template("index.html", id=result)  # ,  form=search)
+
+
+# @app.route("/results")
+# def search_results(search):
+#     results_coll = mongo.db.show
+#     results_query = {"name": search}
+#     results = results_coll.find(results_query)
+#     search_string = search.data['search']
+#     if search.data['search'] == '':
+#         qry = db_session.query(album)
+#         results = qry.all()
+#     if not results:
+#         flash('no results found!')
+#         return redirect(url_for("index"))
+
+#     else:
+#         display results
+#         return render_template('results.html', results=results)
 
 
 @app.route("/signup", methods=["GET", "POST"])

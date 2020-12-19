@@ -3,9 +3,9 @@
 {% block content %}
 <nav class="search-margin">
 <div class="nav-wrapper custom-search z-depth-4">
-      <form class="custom-form">
+      <!-- <form class="custom-form" action = "{{ url_for('search_results') }}" method = "POST"> -->
         <div class="input-field custom-input">
-          <input id="search" type="search" required>
+          <input id="search" type="search" name="search" required>
           <label class="label-icon" for="search"><i class="material-icons">search</i></label>
           <i class="material-icons">close</i>
         </div>

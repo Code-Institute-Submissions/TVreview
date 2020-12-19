@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for x in results %}
+    <h5 class="custom-text">{{ x.name }}</h5>
+{% endfor %}
+
+{% endblock %}
