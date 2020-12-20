@@ -52,20 +52,23 @@ def signUp():
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
+        existing_email = mongo.db.users.find_one(
+            {"email": request.form.get("email").lower()})
 
-        if existing_user:
-            flash("Username already exists")
+        if existing_user or existing_email:
+            flash("Username/ Email already exists")
             redirect(url_for("signUp"))
-
-        signup = {
-            "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password"))
-        }
-        mongo.db.users.insert_one(signup)
-
-        session["user"] = request.form.get("username").lower()
-        flash("Successfully Signed Up")
-        return redirect(url_for('profile', username=session["user"]))
+        else:
+            signup = {
+                "username": request.form.get("username").lower(),
+                "email": request.form.get("email").lower(),
+                "password": generate_password_hash
+                (request.form.get("password"))
+            }
+            mongo.db.users.insert_one(signup)
+            session["user"] = request.form.get("username").lower()
+            flash("Successfully Signed Up")
+            return redirect(url_for('profile', username=session["user"]))
     return render_template("signup.html")
 
 

@@ -5,8 +5,18 @@
     color: #e5e5e5;
 }
 
+.alert-text {
+    font-family: 'Xanh Mono', monospace;
+    color: #c71c1c;
+}
+
+
 .section1 {
     background-color: #14213D;
+}
+
+.section2 {
+    background-color: #000000;
 }
 
 .colour-yellow {

@@ -18,6 +18,7 @@
     <nav class="custom-nav">
         <div class="nav-wrapper">
         <a href="{{ url_for ('index') }}" class="brand-logo custom-logo">W2W</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger custom-text"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="{{ url_for ('index') }}">Home</a></li>
             {% if session.user %}
@@ -30,17 +31,25 @@
         </ul>
         </div>
     </nav>
+    <ul class="sidenav" id="mobile-demo">
+    <li><a href="sass.html">Sass</a></li>
+    <li><a href="badges.html">Components</a></li>
+    <li><a href="collapsible.html">Javascript</a></li>
+    <li><a href="mobile.html">Mobile</a></li>
+  </ul>
     <section class="section1">
     <header class="title">What 2 Watch</header>
     
     {% block content %}
     {% endblock %}
     </section>
-    <section>
+    <section class = "section2">
     <!--flash messages-->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
-                <div>{{ messages }}</div>
+                {% for message in messages %}
+                <div><p class="alert-text">{{ message }}</p></div>
+                {% endfor %}
             {% endif %}
         {% endwith %}
     </section>
