@@ -2,7 +2,25 @@
 
 {% block content %}
     <div class="row">
-    <div class="right col s12 m7">
+    <div class="col s12 m6 offset-s1">
+        <div>
+        <i class="medium custom-star material-icons">star</i>
+        <i class="medium custom-star material-icons">star</i>
+        <i class="medium custom-star material-icons">star</i>
+        <i class="medium custom-star material-icons">star</i>
+        <i class="medium custom-star material-icons">star</i>
+        <p class="custom-text">(1 rating)</p>
+        </div>
+        <div>
+            <h4 class="custom-text">Rate this show</h4>
+            <i class="medium custom-star material-icons">star_border</i>
+            <i class="medium custom-star material-icons">star_border</i>
+            <i class="medium custom-star material-icons">star_border</i>
+            <i class="medium custom-star material-icons">star_border</i>
+            <i class="medium custom-star material-icons">star_border</i>
+        </div>
+    </div>    
+    <div class="col s12 m6">
       <div class="custom-nav card hoverable">
         <div class="card-image">
           <img src="{{ url_for('static', filename='media/placeholder-image.jpg') }}">
@@ -20,7 +38,7 @@
     <div class="col s12">
       <div class="card blue-grey darken-1 hoverable">
         <div class="card-content white-text">
-          <h3 class="custom-text">{{ id.synopsis }}</h3>
+          <p class="custom-text">{{ id.synopsis }}</p>
         </div>
       </div>
     </div>

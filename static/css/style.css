@@ -45,10 +45,16 @@
 .custom-search {
     display: flex;
     margin: 0 auto;
-    width: 50%;
     background-color: #fca311;
     font-family: Arial;
     color:#e5e5e5;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 0px!important;
+}
+
+.custom-input {
+    width: 100%;
     border: 2px solid black;
     border-radius: 5px;
 }
@@ -65,4 +71,9 @@
 /*-----------card-------------------*/
 .card-background {
     background-color: #000000;
+}
+
+/*-----------reviews---------------*/
+.custom-star {
+    color: rgb(161, 161, 4);
 }
