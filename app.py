@@ -1,4 +1,6 @@
 import os
+import requests
+import logging
 from flask import (
     Flask, render_template, url_for, redirect, request, flash, session)
 from flask_pymongo import PyMongo
@@ -19,32 +21,11 @@ mongo = PyMongo(app)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    # search = request.form.get("search")
-    # if request.method == 'POST':
 
-    #    return search_results(search)
 
     tvshow = mongo.db.show
     result = tvshow.find()
-    return render_template("index.html", id=result)  # ,  form=search)
-
-
-# @app.route("/results")
-# def search_results(search):
-#     results_coll = mongo.db.show
-#     results_query = {"name": search}
-#     results = results_coll.find(results_query)
-#     search_string = search.data['search']
-#     if search.data['search'] == '':
-#         qry = db_session.query(album)
-#         results = qry.all()
-#     if not results:
-#         flash('no results found!')
-#         return redirect(url_for("index"))
-
-#     else:
-#         display results
-#         return render_template('results.html', results=results)
+    return render_template("index.html", id=result)
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -116,9 +97,22 @@ def logout():
 
 @app.route("/search/<searchterm>")
 def search(searchterm):
-    result = mongo.db.show.find_one(
-        {}
-    )
+    response = requests.get('https://imdb-api.com/API/SearchSeries/',
+            {"apikey": os.environ.get("APIKEY"), "expression": searchterm})
+    return render_template('error.html',
+        response=response)
+
+
+@app.route("/test2", methods=["GET", "POST"])
+def test2():
+        searchterm = request.form.get("search")
+        # searchresults = response.json()
+        # searchtitle = []
+        # for i in searchresults:
+            # ititle = searchresults.title
+            # searchtitle.append(ititle)
+        return redirect(url_for('search', searchterm=searchterm))
+
 
 @app.route("/addshow")
 def addShow():
@@ -127,29 +121,35 @@ def addShow():
 
 @app.route('/submitShow', methods=['POST'])
 def submitShow():
-    show = {
-        "name": request.form.get("name"),
-        "years": request.form.get("years"),
-        "seasons": request.form.get("seasons"),
-        "country": request.form.get("country"),
-        "synopsis": request.form.get("synopsis")
-    }
-    tvshow = mongo.db.show
-    tvshow.insert_one(show)
+    try:
+        show = {
+            "name": request.form.get("name"),
+            "years": request.form.get("years"),
+            "seasons": request.form.get("seasons"),
+            "country": request.form.get("country"),
+            "synopsis": request.form.get("synopsis")
+        }
+        tvshow = mongo.db.show
+        tvshow.insert_one(show)
+    except Exception:
+        redirect(url_for("error"))
     return redirect(url_for("addShow"))
 
 
 @app.route('/addreview/<show_id>', methods=['GET', 'POST'])
 def addreview(show_id):
     if request.method == "POST":
-        reviews = {
-            "review_for": show_id,
-            "review": request.form.get("review"),
-            "review_by": session["user"]
-        }
-        review = mongo.db.reviews
-        review.insert_one(reviews)
-        return render_template("addreview.html")
+        try:
+            reviews = {
+                "review_for": show_id,
+                "review": request.form.get("review"),
+                "review_by": session["user"]
+            }
+            review = mongo.db.reviews
+            review.insert_one(reviews)
+            return render_template("addreview.html")
+        except Exception:
+            redirect(url_for("error"))
 
 
 @app.route('/tvshow/<show_id>')
@@ -162,6 +162,10 @@ def tvShow(show_id):
     return render_template(
         "tvshow.html", id=result, reviews=reviews)
 
+
+@app.route("/test")
+def test():
+    return render_template("testtvshow.html")
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),

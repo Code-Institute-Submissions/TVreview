@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 /*-------------IMDB API------------------*/  
-const baseURL = "https://imdb-api.com/API/SearchSeries/k_y8kd93un/"
+/*----search------*/
+const baseURL = "https://imdb-api.com/API/SearchSeries/APIKEY/"
+
   
 function getData(search, cb) {
     var xhr = new XMLHttpRequest();
@@ -22,6 +24,8 @@ function getData(search, cb) {
     };
 }
 
+var test = [];
+
 function writeToDocument(search) {
     getData(search, function (data){
         /*clear results*/
@@ -30,7 +34,17 @@ function writeToDocument(search) {
         data = data.results;
         data.forEach(function(searchResult) {
         document.getElementById('data').innerHTML += "<p>" + searchResult.title + "</p>";
+        test += searchResult.title
+        sessionStorage.setItem("title", test);
         });
-        
+        var session = sessionStorage.getItem("title");
+    console.log(session)
     })
+}
+
+/*------load the correct data---------*/
+
+function b() {
+    document.getElementById('test').innerHTML += "<p>" + test + "</p>";
+    console.log(test)
 }
