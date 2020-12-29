@@ -99,19 +99,28 @@ def logout():
 def search(searchterm):
     response = requests.get('https://imdb-api.com/API/SearchSeries/',
             {"apikey": os.environ.get("APIKEY"), "expression": searchterm})
-    return render_template('error.html',
-        response=response)
+    searchresults = response.json()
+    searchtitle = []
+    for i in searchresults:
+        searchtitle.append(i)
+    return render_template('search.html',
+        response=response, searchresults=searchresults, searchtitle=searchtitle)
 
 
-@app.route("/test2", methods=["GET", "POST"])
-def test2():
-        searchterm = request.form.get("search")
-        # searchresults = response.json()
-        # searchtitle = []
-        # for i in searchresults:
-            # ititle = searchresults.title
-            # searchtitle.append(ititle)
-        return redirect(url_for('search', searchterm=searchterm))
+@app.route("/searchredirect", methods=["GET", "POST"])
+def searchRedirect():
+    searchterm = request.form.get("search")
+    return redirect(url_for('search', searchterm=searchterm))
+
+
+@app.route("/tvredirect", methods=["GET", "POST"])
+def tvRedirect():
+    tvtitle = 
+
+@app.route("/testtvshow/<tvtitle>")
+def testtvshow():
+
+
 
 
 @app.route("/addshow")
@@ -162,10 +171,6 @@ def tvShow(show_id):
     return render_template(
         "tvshow.html", id=result, reviews=reviews)
 
-
-@app.route("/test")
-def test():
-    return render_template("testtvshow.html")
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),

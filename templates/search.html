@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for searchresult in searchresults.results %}
+        <p class="custom-text" id="result">{{ searchresult['title'] }}</p>
+        {% endfor %}
+
+{% endblock %}
