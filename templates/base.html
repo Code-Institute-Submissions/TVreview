@@ -22,7 +22,6 @@
             <li><a href="{{ url_for ('index') }}">Home</a></li>
             {% if session.user %}
             <li><a href="{{ url_for ('logout') }}">Logout</a></li>
-            <li><a href="{{ url_for ('addShow') }}">Add a TV Show</a></li>
             {% else %}
             <li><a href="{{ url_for ('signUp') }}">SignUp</a></li> 
             <li><a href="{{ url_for ('login') }}">Login</a></li>
@@ -34,7 +33,6 @@
             <li><a href="{{ url_for ('index') }}">Home</a></li>
             {% if session.user %}
             <li><a href="{{ url_for ('logout') }}">Logout</a></li>
-            <li><a href="{{ url_for ('addShow') }}">Add a TV Show</a></li>
             {% else %}
             <li><a href="{{ url_for ('signUp') }}">SignUp</a></li> 
             <li><a href="{{ url_for ('login') }}">Login</a></li>

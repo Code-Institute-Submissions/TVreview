@@ -21,11 +21,14 @@ mongo = PyMongo(app)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-
-
     tvshow = mongo.db.show
     result = tvshow.find()
     return render_template("index.html", id=result)
+
+
+@app.route("/error")
+def error():
+    return render_template("error.html")
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -98,49 +101,26 @@ def logout():
 @app.route("/search/<searchterm>")
 def search(searchterm):
     response = requests.get('https://imdb-api.com/API/SearchSeries/',
-            {"apikey": os.environ.get("APIKEY"), "expression": searchterm})
+    {"apikey": os.environ.get("APIKEY"), "expression": searchterm})
     searchresults = response.json()
-    searchtitle = []
-    for i in searchresults:
-        searchtitle.append(i)
-    return render_template('search.html',
-        searchresults=searchresults, searchtitle=searchtitle)
+    return render_template('search.html', searchresults=searchresults)
 
 
 @app.route("/searchredirect", methods=["GET", "POST"])
 def searchRedirect():
     searchterm = request.form.get("search")
     return redirect(url_for('search', searchterm=searchterm))
-    
+
 
 @app.route("/tvshow/<show_id>")
-def testtvshow(show_id):
+def tvshow(show_id):
     tvresponse = requests.get('https://imdb-api.com/en/API/Title/',
     {"apikey": os.environ.get("APIKEY"), "id": show_id, "options": "Trailer"})
     show = tvresponse.json()
-    return render_template("tvshow.html", show=show)
-
-
-@app.route("/addshow")
-def addShow():
-    return render_template("addshow.html")
-
-
-@app.route('/submitShow', methods=['POST'])
-def submitShow():
-    try:
-        show = {
-            "name": request.form.get("name"),
-            "years": request.form.get("years"),
-            "seasons": request.form.get("seasons"),
-            "country": request.form.get("country"),
-            "synopsis": request.form.get("synopsis")
-        }
-        tvshow = mongo.db.show
-        tvshow.insert_one(show)
-    except Exception:
-        redirect(url_for("error"))
-    return redirect(url_for("addShow"))
+    review_coll = mongo.db.reviews
+    review_query = {"review_for": show_id}
+    reviews = review_coll.find(review_query)
+    return render_template("tvshow.html", show=show, reviews=reviews)
 
 
 @app.route('/addreview/<show_id>', methods=['GET', 'POST'])
@@ -156,18 +136,7 @@ def addreview(show_id):
             review.insert_one(reviews)
             return render_template("addreview.html")
         except Exception:
-            redirect(url_for("error"))
-
-
-@app.route('/nulltvshow/<show_id>')
-def tvShow(show_id):
-    tvshow = mongo.db.show
-    result = tvshow.find_one({"_id": ObjectId(show_id)})
-    review_coll = mongo.db.reviews
-    review_query = {"review_for": show_id}
-    reviews = review_coll.find(review_query)
-    return render_template(
-        "tvshow.html", id=result, reviews=reviews)
+            return redirect(url_for("error"))
 
 
 if __name__ == "__main__":
