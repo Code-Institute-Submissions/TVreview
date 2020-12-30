@@ -3,7 +3,7 @@
 {% block content %}
 
 {% for searchresult in searchresults.results %}
-        <p class="custom-text" id="result">{{ searchresult['title'] }}</p>
+        <a href="{{ url_for('testtvshow', show_id=searchresult['id']) }}" class="custom-text">{{ searchresult['title'] }}</a>
         {% endfor %}
 
 {% endblock %}

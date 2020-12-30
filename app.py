@@ -104,23 +104,21 @@ def search(searchterm):
     for i in searchresults:
         searchtitle.append(i)
     return render_template('search.html',
-        response=response, searchresults=searchresults, searchtitle=searchtitle)
+        searchresults=searchresults, searchtitle=searchtitle)
 
 
 @app.route("/searchredirect", methods=["GET", "POST"])
 def searchRedirect():
     searchterm = request.form.get("search")
     return redirect(url_for('search', searchterm=searchterm))
+    
 
-
-@app.route("/tvredirect", methods=["GET", "POST"])
-def tvRedirect():
-    tvtitle = 
-
-@app.route("/testtvshow/<tvtitle>")
-def testtvshow():
-
-
+@app.route("/tvshow/<show_id>")
+def testtvshow(show_id):
+    tvresponse = requests.get('https://imdb-api.com/en/API/Title/',
+    {"apikey": os.environ.get("APIKEY"), "id": show_id, "options": "Trailer"})
+    show = tvresponse.json()
+    return render_template("tvshow.html", show=show)
 
 
 @app.route("/addshow")
@@ -161,7 +159,7 @@ def addreview(show_id):
             redirect(url_for("error"))
 
 
-@app.route('/tvshow/<show_id>')
+@app.route('/nulltvshow/<show_id>')
 def tvShow(show_id):
     tvshow = mongo.db.show
     result = tvshow.find_one({"_id": ObjectId(show_id)})
@@ -175,4 +173,4 @@ def tvShow(show_id):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)
+            debug=True)

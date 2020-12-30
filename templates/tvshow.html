@@ -22,14 +22,14 @@
     </div>    
     <div class="col s12 m6">
       <div class="custom-nav card hoverable">
-        <div class="card-image">
-          <img src="{{ url_for('static', filename='media/placeholder-image.jpg') }}">
-          <span class="card-title custom-text">{{ id.name }}</span>
+        <div class="card-image custom-card-image">
+          <img src="{{ show.image }}">
         </div>
         <div class="card-content">
-          <h3 class="custom-text">Years: {{ id.years }}</h3>
-          <h3 class="custom-text">Seasons: {{ id.seasons }}</h3>
-          <h3 class="custom-text">Country: {{ id.country }}</h3>
+          <h5 class="custom-text">{{ show.fullTitle }}</h5>
+          <h5 class="custom-text">Genre: {{ show.genres }} </h5>
+          <h5 class="custom-text">Country: {{ show.countries }}</h5>
+          <h5 class="custom-text">Starring: {{ show.stars }}</h5>
         </div>
       </div>
     </div>
@@ -38,12 +38,12 @@
     <div class="col s12">
       <div class="card blue-grey darken-1 hoverable">
         <div class="card-content white-text">
-          <p class="custom-text">{{ id.synopsis }}</p>
+          <p class="custom-text">{{ show.plot }}</p>
         </div>
       </div>
     </div>
   </div>
-  
+  <section class="section2">
   <div class="row">
     <div class="col s12 m6">
       <div class="card yellow darken-4">
@@ -68,7 +68,7 @@
     <div class="row">
         <div class="col s12">
 
-    <form action = "{{ url_for('addreview', show_id=id._id) }}" method = "POST" class="col s12">
+    <form action = "{{ url_for('addreview', show_id=show.id) }}" method = "POST" class="col s12">
 
        <div class="row">
         <div class="input-field custom-text col s12">
@@ -87,5 +87,12 @@
     </div>
       </div>
       
+      <div>
+        <h3 class="custom-text">Similar:</h3>
+        {% for similar in show.similars %}
+        <a href="{{ url_for('testtvshow', show_id=similar['id']) }}"><img src="{{ similar.image }}" class="similar-image"></a>
+      </div>
+      {% endfor %}
+    </section>
       
 {% endblock %}

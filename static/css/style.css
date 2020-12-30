@@ -13,10 +13,11 @@
 
 .section1 {
     background-color: #14213D;
+  
 }
 
 .section2 {
-    background-color: #000000;
+    background-color: #3a3a3a;
 }
 
 .colour-yellow {
@@ -73,7 +74,14 @@
     background-color: #000000;
 }
 
+.custom-card-image {
+    height: 50%;
+}
 /*-----------reviews---------------*/
 .custom-star {
     color: rgb(161, 161, 4);
+}
+
+.similar-image {
+    width: 20%;
 }
