@@ -13,7 +13,7 @@
 
 .section1 {
     background-color: #14213D;
-  
+    height: 100%;
 }
 
 .section2 {
@@ -24,6 +24,9 @@
     background-color: #fca311;
 }
 
+.row-custom {
+    margin-bottom: 0%;
+}
 /*--------------nav and title-------------------*/
 
 .custom-nav {
@@ -37,7 +40,7 @@
     font-size: 60px;
     color: #e5e5e5;
     text-align: center;
-    padding-top: 5px;
+    padding: 10px 0px;
 }
 
 
@@ -69,19 +72,52 @@
     background-color: rgba(5, 5, 5, 0); 
 }
 
-/*-----------card-------------------*/
+/*-----------cards-------------------*/
 .card-background {
     background-color: #000000;
 }
 
 .custom-card-image {
-    height: 50%;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #000000;
+    font-family: 'Xanh Mono', monospace;
+}
+
+.custom-card-review {
+    background-color: rgba(114, 114, 114, 0.7);
+    margin: 10% 0%;
+}
+
+.custom-card-plot {
+    margin: 10px 0px;
 }
 /*-----------reviews---------------*/
 .custom-star {
     color: rgb(161, 161, 4);
 }
 
+.margin-custom-review {
+    margin: 100px 0px;
+}
+
+/*----------bottom of the page----------*/
+
 .similar-image {
-    width: 20%;
+    width: 10%;
+}
+
+
+
+
+
+/*-----------media queries------------------*/
+@media screen and (min-width: 768px) {
+    .custom-card-image {
+    width: 70%;
+}
+
+@media screen and (min-width: 1080px) {
+    .custom-card-image {
+    width: 50%;
 }
