@@ -21,9 +21,7 @@ mongo = PyMongo(app)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    tvshow = mongo.db.show
-    result = tvshow.find()
-    return render_template("index.html", id=result)
+    return render_template("index.html")
 
 
 @app.route("/error")
@@ -120,7 +118,10 @@ def tvshow(show_id):
     review_coll = mongo.db.reviews
     review_query = {"review_for": show_id}
     reviews = review_coll.find(review_query)
-    return render_template("tvshow.html", show=show, reviews=reviews)
+    rating = mongo.db.ratings.find({"rating_for": "tt0108778"})
+    rating_count = rating.count()
+    return render_template("tvshow.html", 
+    show=show, reviews=reviews, rating_count=rating_count)
 
 
 @app.route('/addreview/<show_id>', methods=['GET', 'POST'])
