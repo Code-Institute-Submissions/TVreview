@@ -15,7 +15,9 @@
         </div>
         <div class="center">
             <h4 class="custom-text">Rate this show</h4>
-            <i class="medium custom-star material-icons star-rating" id = "star-rating1" onmouseover="starChange1()" onmouseout="star1()">star_border</i>
+            <form action = "{{ url_for('oneStar', show_id=show.id) }}" method = "POST">
+            <button type="submit" value="submit"><i class="medium custom-star material-icons star-rating" id = "star-rating1" onmouseover="starChange1()" onmouseout="star1()">star_border</i></button>
+            </form>
             <i class="medium custom-star material-icons star-rating" id = "star-rating2" onmouseover="starChange2()" onmouseout="star2()">star_border</i>
             <i class="medium custom-star material-icons star-rating" id = "star-rating3" onmouseover="starChange3()" onmouseout="star3()">star_border</i>
             <i class="medium custom-star material-icons star-rating" id = "star-rating4" onmouseover="starChange4()" onmouseout="star4()">star_border</i>
@@ -36,7 +38,8 @@
 
      
         <div class="input-field custom-text">
-          <input id="review" type="text" class="validate custom-text" name="review">
+          <i class="material-icons prefix">mode_edit</i>
+          <textarea id="review" class="materialize-textarea custom-text" name="review"></textarea>
           <label for="review">Review</label>
         </div>
 
@@ -53,7 +56,12 @@
       <div class="center"><h3 class="custom-text"><a href="{{ url_for('login') }}">Login</a> to add a review</h3></div>
       {% endif %}  
       </div>
-      
+
+      <!-- Favourite the show -->
+      <div class="center">
+      <i class="material-icons medium" onmouseover="favoriteChange()" onmouseout="favorite()" id="favorite">favorite_border</i>
+      </div>
+    </div>
    
      
     <!-- Details of the show including image -->
@@ -71,7 +79,7 @@
       </div>
     </div>
    </div>
-   
+  
     <!-- The show synopsis -->
     <div class="row row-custom">
     <div class="col s10 offset-s1 custom-card-plot">
@@ -81,7 +89,7 @@
         </div>
       </div>
     </div>
-   </div>
+   
     
 </section>
 

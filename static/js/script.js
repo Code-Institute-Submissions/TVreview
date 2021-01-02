@@ -110,3 +110,14 @@ function star5() {
     document.getElementById("star-rating4").innerHTML = "star_border";
     document.getElementById("star-rating5").innerHTML = "star_border";
 }
+
+
+/*----------favourite----------*/
+
+function favoriteChange() {
+    document.getElementById("favorite").innerHTML = "favorite";
+}
+
+function favorite() {
+    document.getElementById("favorite").innerHTML = "favorite_border";
+}

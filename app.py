@@ -1,6 +1,5 @@
 import os
 import requests
-import logging
 from flask import (
     Flask, render_template, url_for, redirect, request, flash, session)
 from flask_pymongo import PyMongo
@@ -118,7 +117,7 @@ def tvshow(show_id):
     review_coll = mongo.db.reviews
     review_query = {"review_for": show_id}
     reviews = review_coll.find(review_query)
-    rating = mongo.db.ratings.find({"rating_for": "tt0108778"})
+    rating = mongo.db.ratings.find({"rating_for": show_id})
     rating_count = rating.count()
     return render_template("tvshow.html", 
     show=show, reviews=reviews, rating_count=rating_count)
@@ -136,6 +135,88 @@ def addreview(show_id):
             review = mongo.db.reviews
             review.insert_one(reviews)
             return render_template("addreview.html")
+        except Exception:
+            return redirect(url_for("error"))
+
+# Add the ratings to the database
+
+
+@app.route('/1star/<show_id>', methods=['GET', 'POST'])
+def oneStar(show_id):
+    if request.method == "POST":
+        try:
+            star = {
+                "rating_for": show_id,
+                "rating": 1,
+                "rating_by": session["user"]
+            }
+            rating = mongo.db.ratings
+            rating.insert_one(star)
+            return render_template("addreview.html")
+        except Exception:
+            return redirect(url_for("error"))
+
+
+@app.route('/2star/<show_id>', methods=['GET', 'POST'])
+def twoStar(show_id):
+    if request.method == "POST":
+        try:
+            star = {
+                "rating_for": show_id,
+                "rating": 2,
+                "rating_by": session["user"]
+            }
+            rating = mongo.db.ratings
+            rating.insert_one(star)
+            return redirect(url_for("tvshow"))
+        except Exception:
+            return redirect(url_for("error"))
+
+
+@app.route('/3star/<show_id>', methods=['GET', 'POST'])
+def threeStar(show_id):
+    if request.method == "POST":
+        try:
+            star = {
+                "rating_for": show_id,
+                "rating": 3,
+                "rating_by": session["user"]
+            }
+            rating = mongo.db.ratings
+            rating.insert_one(star)
+            return redirect(url_for("tvshow"))
+        except Exception:
+            return redirect(url_for("error"))
+
+
+@app.route('/4star/<show_id>', methods=['GET', 'POST'])
+def fourStar(show_id):
+    if request.method == "POST":
+        try:
+            star = {
+                "rating_for": show_id,
+                "rating": 4,
+                "rating_by": session["user"]
+            }
+            rating = mongo.db.ratings
+            rating.insert_one(star)
+            return redirect(url_for("tvshow"))
+        except Exception:
+            return redirect(url_for("error"))
+
+
+@app.route('/5star/<show_id>', methods=['GET', 'POST'])
+def fiveStar(show_id):
+    if request.method == "POST":
+        try:
+            star = {
+                "rating_for": show_id,
+                "rating": 5,
+                "rating_by": session["user"]
+            }
+            rating = mongo.db.ratings
+            rating.insert_one(star)
+            return redirect(url_for("tvshow"))
         except Exception:
             return redirect(url_for("error"))
 
