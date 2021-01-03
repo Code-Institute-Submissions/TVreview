@@ -3,6 +3,8 @@
 .custom-text {
     font-family: 'Xanh Mono', monospace;
     color: #e5e5e5;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .alert-text {
@@ -16,6 +18,11 @@
     height: 100%;
 }
 
+.section1b {
+    background-color: #14213D;
+    height: 100vh;
+}
+
 .section2 {
     background-color: #3a3a3a;
 }
@@ -26,6 +33,10 @@
 
 .row-custom {
     margin-bottom: 0%;
+}
+
+.inline {
+    display: inline-block;
 }
 /*--------------nav and title-------------------*/
 
@@ -68,8 +79,7 @@
 }
 
 .search-margin {
-    margin: 20px 0px;
-    background-color: rgba(5, 5, 5, 0); 
+    background-color:#14213D; 
 }
 
 .custom-search-btn {

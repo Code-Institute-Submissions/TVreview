@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<section class="section1">
     <div class="row">
         <!-- left column -->
     <div class="col s12 m6 container">
@@ -15,13 +16,21 @@
         </div>
         <div class="center">
             <h4 class="custom-text">Rate this show</h4>
-            <form action = "{{ url_for('oneStar', show_id=show.id) }}" method = "POST">
+            <form action = "{{ url_for('oneStar', show_id=show.id) }}" method = "POST" class="inline">
             <button type="submit" value="submit"><i class="medium custom-star material-icons star-rating" id = "star-rating1" onmouseover="starChange1()" onmouseout="star1()">star_border</i></button>
             </form>
+            <form action = "{{ url_for('twoStar', show_id=show.id) }}" method = "POST" class="inline">
             <i class="medium custom-star material-icons star-rating" id = "star-rating2" onmouseover="starChange2()" onmouseout="star2()">star_border</i>
+            </form>
+            <form action = "{{ url_for('threeStar', show_id=show.id) }}" method = "POST" class="inline">
             <i class="medium custom-star material-icons star-rating" id = "star-rating3" onmouseover="starChange3()" onmouseout="star3()">star_border</i>
+            </form>
+            <form action = "{{ url_for('fourStar', show_id=show.id) }}" method = "POST" class="inline">
             <i class="medium custom-star material-icons star-rating" id = "star-rating4" onmouseover="starChange4()" onmouseout="star4()">star_border</i>
+            </form>
+            <form action = "{{ url_for('fiveStar', show_id=show.id) }}" method = "POST" class="inline">
             <i class="medium custom-star material-icons star-rating" id = "star-rating5" onmouseover="starChange5()" onmouseout="star5()">star_border</i>
+            </form>
         </div>
     
 
@@ -32,24 +41,17 @@
         <div><h3 class="custom-text">Add a Review</h3></div>
     
     <div>
-       
-
-    <form action = "{{ url_for('addreview', show_id=show.id) }}" method = "POST">
-
-     
+    <form action = "{{ url_for('addreview', show_id=show.id) }}" method = "POST"> 
         <div class="input-field custom-text">
           <i class="material-icons prefix">mode_edit</i>
           <textarea id="review" class="materialize-textarea custom-text" name="review"></textarea>
           <label for="review">Review</label>
         </div>
-
-     
         <div class="input-field custom-text center">
             <button class="btn waves-effect waves-light colour-yellow" type="submit">Submit
                 <i class="material-icons right">send</i>
             </button>
         </div>
-
     </form>    
       </div>
       {% else %}
@@ -59,7 +61,9 @@
 
       <!-- Favourite the show -->
       <div class="center">
-      <i class="material-icons medium" onmouseover="favoriteChange()" onmouseout="favorite()" id="favorite">favorite_border</i>
+          <form action = "{{ url_for('favourite', username=session['user'], show_id=show.id) }}" method = "POST">
+      <button type="submit" value="submit"><i class="material-icons medium" onmouseover="favoriteChange()" onmouseout="favorite()" id="favorite">favorite_border</i></button>
+      </form>
       </div>
     </div>
    

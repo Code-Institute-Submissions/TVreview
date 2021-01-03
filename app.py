@@ -82,9 +82,11 @@ def profile(username):
     # get user's username from database
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-
+    favourites = mongo.db.favourites.find({"user": session["user"]})
+    reviews = mongo.db.reviews.find({"review_by": session["user"]})
     if session["user"]:
-        return render_template("profile.html", username=username)
+        return render_template("profile.html",
+        username=username, favourites=favourites, reviews=reviews)
 
     return redirect(url_for('login'))
 
@@ -144,81 +146,135 @@ def addreview(show_id):
 @app.route('/1star/<show_id>', methods=['GET', 'POST'])
 def oneStar(show_id):
     if request.method == "POST":
-        try:
-            star = {
-                "rating_for": show_id,
-                "rating": 1,
-                "rating_by": session["user"]
-            }
-            rating = mongo.db.ratings
-            rating.insert_one(star)
-            return render_template("addreview.html")
-        except Exception:
-            return redirect(url_for("error"))
+        existing_rating = mongo.db.ratings.find_one(
+            {"rating_by": session["user"], "rating_for": show_id})
+        if existing_rating:
+            flash("You have already rated this")
+            return redirect(url_for("tvshow", show_id=show_id))
+        else:
+            try:
+                star = {
+                    "rating_for": show_id,
+                    "rating": 1,
+                    "rating_by": session["user"]
+                }
+                rating = mongo.db.ratings
+                rating.insert_one(star)
+                return render_template("addreview.html")
+            except Exception:
+                return redirect(url_for("error"))
 
 
 @app.route('/2star/<show_id>', methods=['GET', 'POST'])
 def twoStar(show_id):
     if request.method == "POST":
-        try:
-            star = {
-                "rating_for": show_id,
-                "rating": 2,
-                "rating_by": session["user"]
-            }
-            rating = mongo.db.ratings
-            rating.insert_one(star)
-            return redirect(url_for("tvshow"))
-        except Exception:
-            return redirect(url_for("error"))
+        existing_rating = mongo.db.ratings.find_one(
+            {"rating_by": session["user"], "rating_for": show_id})
+        if existing_rating:
+            flash("You have already rated this")
+            return redirect(url_for("tvshow", show_id=show_id))
+        else:
+            try:
+                star = {
+                    "rating_for": show_id,
+                    "rating": 2,
+                    "rating_by": session["user"]
+                }
+                rating = mongo.db.ratings
+                rating.insert_one(star)
+                return render_template("addreview.html")
+            except Exception:
+                return redirect(url_for("error"))
 
 
 @app.route('/3star/<show_id>', methods=['GET', 'POST'])
 def threeStar(show_id):
     if request.method == "POST":
-        try:
-            star = {
-                "rating_for": show_id,
-                "rating": 3,
-                "rating_by": session["user"]
-            }
-            rating = mongo.db.ratings
-            rating.insert_one(star)
-            return redirect(url_for("tvshow"))
-        except Exception:
-            return redirect(url_for("error"))
+        existing_rating = mongo.db.ratings.find_one(
+            {"rating_by": session["user"], "rating_for": show_id})
+        if existing_rating:
+            flash("You have already rated this")
+            return redirect(url_for("tvshow", show_id=show_id))
+        else:
+            try:
+                star = {
+                    "rating_for": show_id,
+                    "rating": 3,
+                    "rating_by": session["user"]
+                }
+                rating = mongo.db.ratings
+                rating.insert_one(star)
+                return render_template("addreview.html")
+            except Exception:
+                return redirect(url_for("error"))
 
 
 @app.route('/4star/<show_id>', methods=['GET', 'POST'])
 def fourStar(show_id):
     if request.method == "POST":
-        try:
-            star = {
-                "rating_for": show_id,
-                "rating": 4,
-                "rating_by": session["user"]
-            }
-            rating = mongo.db.ratings
-            rating.insert_one(star)
-            return redirect(url_for("tvshow"))
-        except Exception:
-            return redirect(url_for("error"))
+        existing_rating = mongo.db.ratings.find_one(
+            {"rating_by": session["user"], "rating_for": show_id})
+        if existing_rating:
+            flash("You have already rated this")
+            return redirect(url_for("tvshow", show_id=show_id))
+        else:
+            try:
+                star = {
+                    "rating_for": show_id,
+                    "rating": 4,
+                    "rating_by": session["user"]
+                }
+                rating = mongo.db.ratings
+                rating.insert_one(star)
+                return render_template("addreview.html")
+            except Exception:
+                return redirect(url_for("error"))
 
 
 @app.route('/5star/<show_id>', methods=['GET', 'POST'])
 def fiveStar(show_id):
     if request.method == "POST":
-        try:
-            star = {
-                "rating_for": show_id,
-                "rating": 5,
-                "rating_by": session["user"]
-            }
-            rating = mongo.db.ratings
-            rating.insert_one(star)
-            return redirect(url_for("tvshow"))
-        except Exception:
-            return redirect(url_for("error"))
+        existing_rating = mongo.db.ratings.find_one(
+            {"rating_by": session["user"], "rating_for": show_id})
+        if existing_rating:
+            flash("You have already rated this")
+            return redirect(url_for("tvshow", show_id=show_id))
+        else:
+            try:
+                star = {
+                    "rating_for": show_id,
+                    "rating": 5,
+                    "rating_by": session["user"]
+                }
+                rating = mongo.db.ratings
+                rating.insert_one(star)
+                return render_template("addreview.html")
+            except Exception:
+                return redirect(url_for("error"))
+
+# Favourite
+
+
+@app.route('/favourite/<username>/<show_id>', methods=['GET', 'POST'])
+def favourite(username, show_id):
+    if request.method == "POST":
+        # check if already favourited
+        existing_favourite = mongo.db.favourites.find_one(
+            {"user": session["user"], "favourite": show_id})
+        if existing_favourite:
+            flash("this is already on your favourites list")
+            return redirect(url_for("tvshow", show_id=show_id))
+        else:
+            try:
+                favourite = {
+                    "favourite": show_id,
+                    "user": session["user"]
+                }
+                fav = mongo.db.favourites
+                fav.insert_one(favourite)
+                return render_template("addreview.html")
+            except Exception:
+                return redirect(url_for("error"))
 
 
 if __name__ == "__main__":

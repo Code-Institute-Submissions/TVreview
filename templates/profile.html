@@ -1,12 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<section class="section1b">
 <div class="row">
     <h5 class="custom-text center col s6">Welcome {{ username }}</h5>
 </div>
 <div class="row">
+    <p class="custom-text">
+        {% for favourite in favourites %}
+            {{ favourite.favourite }}
+        {% endfor %}
+    </p>
+<div class="row">
+    <p class="custom-text">
+        {% for review in reviews %}
+            {{ review.review_for }}
+            {{ review.review }}
+        {% endfor %}
+    </p>
+</div>
+<div class="row">
     <button type="button"><a href="{{ url_for ('logout') }}">Logout</a></button>
 </div>
-
+</section>
 {% endblock %}

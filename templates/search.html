@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
+<section class="section1b">
 
 {% for searchresult in searchresults.results %}
-        <a href="{{ url_for('tvshow', show_id=searchresult['id']) }}" class="custom-text">{{ searchresult['title'] }}</a>
+        <a href="{{ url_for('tvshow', show_id=searchresult['id']) }}" class="custom-text">{{ searchresult['title'] }}<br></a>
 {% endfor %}
-
+</section>
 {% endblock %}
