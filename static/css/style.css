@@ -35,8 +35,20 @@
     margin-bottom: 0%;
 }
 
+.margin-left {
+    margin-left: 10px;
+}
+
 .inline {
     display: inline-block;
+}
+
+.custom-padding {
+    padding-top: 100px;
+}
+
+.custom-padding2 {
+    padding-top: 40px;
 }
 /*--------------nav and title-------------------*/
 
@@ -79,15 +91,21 @@
 }
 
 .search-margin {
-    background-color:#14213D; 
+    background-color:#14213D;
+    margin-top: 20px; 
 }
 
 .custom-search-btn {
     margin-left: 5px;
     background-color: black;
     border-radius: 2px;
+    width: 50%;
+    height: 30px;
 }
 
+.text-border {
+    border: 1px solid #e5e5e5;
+}
 /*-----------cards-------------------*/
 .card-background {
     background-color: #000000;

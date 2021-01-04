@@ -2,9 +2,10 @@
 
 {% block content %}
 <section class="section1b">
-
+<div class="center custom-padding">
 {% for searchresult in searchresults.results %}
-        <a href="{{ url_for('tvshow', show_id=searchresult['id']) }}" class="custom-text">{{ searchresult['title'] }}<br></a>
+        <a href="{{ url_for('tvshow', show_id=searchresult['id']) }}" class="custom-text text-border">{{ searchresult['title'] }}<br></a>
 {% endfor %}
+</div>
 </section>
 {% endblock %}
