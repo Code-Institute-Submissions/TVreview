@@ -116,13 +116,22 @@ def tvshow(show_id):
     tvresponse = requests.get('https://imdb-api.com/en/API/Title/',
     {"apikey": os.environ.get("APIKEY"), "id": show_id, "options": "Trailer"})
     show = tvresponse.json()
+    # show the reviews
     review_coll = mongo.db.reviews
     review_query = {"review_for": show_id}
     reviews = review_coll.find(review_query)
+    # show total number of ratings
     rating = mongo.db.ratings.find({"rating_for": show_id})
     rating_count = rating.count()
+    # show average rating
+    total = 0
+    for x in rating:
+        total += x.get("rating")
+    # find the average
+    score = total/rating.count()
+    print(score)
     return render_template("tvshow.html", 
-    show=show, reviews=reviews, rating_count=rating_count)
+    show=show, reviews=reviews, rating_count=rating_count, score=score)
 
 
 @app.route('/addreview/<show_id>', methods=['GET', 'POST'])

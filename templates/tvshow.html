@@ -2,6 +2,7 @@
 
 {% block content %}
 <section class="section1">
+    {{ rating }}
     <div class="row">
         <!-- left column -->
     <div class="col s12 m6 container">
@@ -13,11 +14,12 @@
         <i class="medium custom-star material-icons">star</i>
         <i class="medium custom-star material-icons">star</i>
         <p class="custom-text">({{ rating_count }} rating(s))</p>
+        <p class="custom-text">({{ score }} star(s))</p>
         </div>
         <div class="center custom-padding2">
             <h4 class="custom-text">Rate this show</h4>
             <form action = "{{ url_for('oneStar', show_id=show.id) }}" method = "POST" class="inline">
-            <button type="submit" value="submit"><i class="medium custom-star material-icons star-rating" id = "star-rating1" onmouseover="starChange1()" onmouseout="star1()">star_border</i></button>
+            <button type="submit" value="submit" class="star-btn-background"><i class="medium custom-star material-icons star-rating" id = "star-rating1" onmouseover="starChange1()" onmouseout="star1()">star_border</i></button>
             </form>
             <form action = "{{ url_for('twoStar', show_id=show.id) }}" method = "POST" class="inline">
             <i class="medium custom-star material-icons star-rating" id = "star-rating2" onmouseover="starChange2()" onmouseout="star2()">star_border</i>
