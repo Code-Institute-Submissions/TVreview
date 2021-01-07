@@ -131,12 +131,20 @@
     color: rgb(161, 161, 4);
 }
 
+.custom-fav {
+    color: rgb(168, 3, 119);
+}
+
 .margin-custom-review {
     margin: 100px 0px;
 }
 
 .star-btn-background {
-    background-color: #14213D;
+     border: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0px;
+    
 }
 /*----------bottom of the page----------*/
 

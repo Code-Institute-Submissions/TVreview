@@ -1,5 +1,6 @@
 import os
 import requests
+import json
 from flask import (
     Flask, render_template, url_for, redirect, request, flash, session)
 from flask_pymongo import PyMongo
@@ -128,8 +129,10 @@ def tvshow(show_id):
     for x in rating:
         total += x.get("rating")
     # find the average
-    score = total/rating.count()
-    print(score)
+    if rating_count >= 1:
+        score = int(total/rating.count())
+    else:
+        score = 0
     return render_template("tvshow.html", 
     show=show, reviews=reviews, rating_count=rating_count, score=score)
 
