@@ -66,7 +66,7 @@ def login():
                 existing_user["password"], request.form.get("password")):
                     session["user"] = request.form.get("username").lower()
                     return redirect(url_for(
-                        'profile', username=session["user"]))
+                        'loggedin'))
             else:
                 # invalid password
                 flash("incorrect username and/ or password")
@@ -76,6 +76,11 @@ def login():
             flash("incorrect username and/ or password")
             return redirect(url_for('login'))
     return render_template("login.html")
+
+
+@app.route("/loggedin")
+def loggedin():
+    return render_template("loggedin.html", username=session["user"])
 
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
@@ -117,6 +122,7 @@ def tvshow(show_id):
     tvresponse = requests.get('https://imdb-api.com/en/API/Title/',
     {"apikey": os.environ.get("APIKEY"), "id": show_id, "options": "Trailer"})
     show = tvresponse.json()
+    session["global_show_id"] = show.get("id")
     # show the reviews
     review_coll = mongo.db.reviews
     review_query = {"review_for": show_id}
@@ -130,7 +136,7 @@ def tvshow(show_id):
         total += x.get("rating")
     # find the average
     if rating_count >= 1:
-        score = int(total/rating.count())
+        score = int(total/rating_count)
     else:
         score = 0
     return render_template("tvshow.html", 
