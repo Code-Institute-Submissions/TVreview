@@ -50,6 +50,19 @@
 .custom-padding2 {
     padding-top: 40px;
 }
+
+.custom-padding3 {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.margin-top1 {
+    margin-top: 10px;
+}
+
+.capital-letter {
+    text-transform: capitalize;
+}
 /*--------------nav and title-------------------*/
 
 .custom-nav {
@@ -145,6 +158,11 @@
     box-shadow: none;
     border-radius: 0px;
     
+}
+
+.custom-textarea {
+    height: 100px;
+
 }
 /*----------bottom of the page----------*/
 

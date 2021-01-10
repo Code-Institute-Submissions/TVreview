@@ -3,25 +3,39 @@
 {% block content %}
 <section class="section1b custom-padding">
 <div class="row">
-    <h5 class="custom-text center col s6">{{ username }}'s Profile</h5>
+    <h2 class="custom-text center col s12">{{ username }}'s Profile</h2>
 </div>
 <div class="row">
-    <p class="custom-text">
+    <div class="col s12"><h3 class="custom-text">Your Favourite TV Shows</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+    <h5 class="custom-text capital-letter">
         {% for favourite in favourites %}
-            {{ favourite.favourite }}
+             <a href="{{ url_for('tvshow', show_id=favourite.favourite) }}">{{ favourite.title }}</a><!--<i class="small material-icons">clear</i>--><br>
         {% endfor %}
-    </p>
+    </h5>
+    </div>
 </div>
 <div class="row">
-    <p class="custom-text">
+    <div class="col s12"><h3 class="custom-text">Your Reviews</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col s6">
+        
         {% for review in reviews %}
-            {{ review.review_for }}
-            {{ review.review }}
+        <div class="text-border">
+            <h5 class="custom-text capital-letter">{{ review.title }}:</h5><br>
+            <p class="custom-text">{{ review.review }}</p>
+        </div>
         {% endfor %}
-    </p>
+    
+    </div>
 </div>
 <div class="row">
-    <button type="button"><a href="{{ url_for ('logout') }}">Logout</a></button>
+    <button type="button"><a href="#">Edit My Details</a></button>
 </div>
 </section>
 {% endblock %}

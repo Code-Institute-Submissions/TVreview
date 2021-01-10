@@ -114,8 +114,6 @@ def search(searchterm):
 @app.route("/searchredirect", methods=["GET", "POST"])
 def searchRedirect():
     searchterm = request.form.get("search")
-    session.pop("global_show_id")
-    session.pop("title")
     return redirect(url_for('search', searchterm=searchterm))
 
 
@@ -142,8 +140,21 @@ def tvshow(show_id):
         score = int(total/rating_count)
     else:
         score = 0
+    # favourite heart filled in if a favourite
+    favourite = "favorite_border"  
+    existing_favourite = mongo.db.favourites.find_one(
+            {"user": session["user"], "favourite": show_id})
+    if existing_favourite:
+        favourite = "favorite"
+    # Hide ratings and reviews if already done
+    existing_rating = mongo.db.ratings.find_one(
+            {"rating_by": session["user"], "rating_for": show_id})
+    already_reviewed = mongo.db.reviews.find_one({"review_by": session["user"],
+    "review_for": show_id})
     return render_template("tvshow.html", 
-    show=show, reviews=reviews, rating_count=rating_count, score=score)
+    show=show, reviews=reviews, rating_count=rating_count, 
+    score=score, favourite=favourite, existing_rating=existing_rating, 
+    already_reviewed=already_reviewed)
 
 
 @app.route('/addreview/<show_id>', methods=['GET', 'POST'])
@@ -168,24 +179,18 @@ def addreview(show_id):
 @app.route('/rating/<show_id>/<rating_no>', methods=['GET', 'POST'])
 def rating(show_id, rating_no):
     if request.method == "POST":
-        existing_rating = mongo.db.ratings.find_one(
-            {"rating_by": session["user"], "rating_for": show_id})
-        if existing_rating:
-            flash("You have already rated this")
-            return redirect(url_for("tvshow", show_id=show_id))
-        else:
-            try:
-                star = {
-                    "rating_for": show_id,
-                    "title": session["title"],
-                    "rating": int(rating_no),
-                    "rating_by": session["user"]
-                }
-                rating = mongo.db.ratings
-                rating.insert_one(star)
-                return render_template("addreview.html")
-            except Exception:
-                return redirect(url_for("error"))
+        try:
+            star = {
+                "rating_for": show_id,
+                "title": session["title"],
+                "rating": int(rating_no),
+                "rating_by": session["user"]
+            }
+            rating = mongo.db.ratings
+            rating.insert_one(star)
+            return render_template("addreview.html")
+        except Exception:
+            return redirect(url_for("error"))
 
 
 # Favourite

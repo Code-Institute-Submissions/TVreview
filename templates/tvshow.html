@@ -5,74 +5,7 @@
     {{ rating }}
     <div class="row">
         <!-- left column -->
-    <div class="col s12 m6 container">
-        
-        <!-- star ratings-->
-        <div class="center custom-padding2">
-        {% for n in range(score)%}
-        <i class="medium custom-star material-icons">star</i>
-        {% endfor %}
-        <p class="custom-text">({{ rating_count }} rating(s))</p>
-        <p class="custom-text">({{ score }} star(s))</p>
-        </div>
-        <!-- rate show if logged in -->
-        {% if session.user %}
-        <div class="center custom-padding2">
-            <h4 class="custom-text">Rate this show</h4>
-            <form action = "{{ url_for('rating', show_id=show.id, rating_no=1) }}" method = "POST" class="inline">
-            <button type="submit" value="submit" class="star-btn-background"><i class="medium custom-star material-icons star-rating" id = "star-rating1" onmouseover="starChange1()" onmouseout="star1()">star_border</i></button>
-            </form>
-            <form action = "{{ url_for('rating', show_id=show.id, rating_no=2)  }}" method = "POST" class="inline">
-            <button type="submit" value="submit" class="star-btn-background"><i class="medium custom-star material-icons star-rating" id = "star-rating2" onmouseover="starChange2()" onmouseout="star2()">star_border</i></button>
-            </form>
-            <form action = "{{ url_for('rating', show_id=show.id, rating_no=3)  }}" method = "POST" class="inline">
-            <button type="submit" value="submit" class="star-btn-background"><i class="medium custom-star material-icons star-rating" id = "star-rating3" onmouseover="starChange3()" onmouseout="star3()">star_border</i></button>
-            </form>
-            <form action = "{{ url_for('rating', show_id=show.id, rating_no=4)  }}" method = "POST" class="inline">
-            <button type="submit" value="submit" class="star-btn-background"><i class="medium custom-star material-icons star-rating" id = "star-rating4" onmouseover="starChange4()" onmouseout="star4()">star_border</i></button>
-            </form>
-            <form action = "{{ url_for('rating', show_id=show.id, rating_no=5)  }}" method = "POST" class="inline">
-            <button type="submit" value="submit" class="star-btn-background"><i class="medium custom-star material-icons star-rating" id = "star-rating5" onmouseover="starChange5()" onmouseout="star5()">star_border</i></button>
-            </form>
-        </div>
-    
-
-
-    <!--add a review button if logged in-->
-    
-    <div class="margin-custom-review custom-padding2">
-        <div><h3 class="custom-text">Add a Review</h3></div>
-    
-    
-    <form action = "{{ url_for('addreview', show_id=show.id) }}" method = "POST"> 
-        <div class="input-field custom-text">
-          <i class="material-icons prefix">mode_edit</i>
-          <textarea id="review" class="materialize-textarea custom-text" name="review"></textarea>
-          <label for="review">Review</label>
-        </div>
-        <div class="input-field custom-text center">
-            <button class="btn waves-effect waves-light colour-yellow" type="submit">Submit
-                <i class="material-icons right">send</i>
-            </button>
-        </div>
-    </form>    
-      </div>
-      <!-- Favourite the show -->
-      <div class="center custom-padding2">
-          <form action = "{{ url_for('favourite', username=session['user'], show_id=show.id) }}" method = "POST">
-      <button type="submit" value="submit" class="star-btn-background"><i class="material-icons medium custom-fav" onmouseover="favoriteChange()" onmouseout="favorite()" id="favorite">favorite_border</i></button>
-      </form>
-      </div>
-      {% else %}
-      <div class="center custom-padding2"><h3 class="custom-text"><a href="{{ url_for('login') }}">Login</a> to add a review</h3></div>
-      {% endif %}  
-     
-
-      
-     </div>
-     
-     
-    <!-- Details of the show including image -->
+          <!-- Details of the show including image -->
     <div class="col s12 m6">
       <div class="card hoverable custom-card-image">
         <div class="card-image">
@@ -86,7 +19,84 @@
         </div>
       </div>
      </div>
-   </div>
+   
+    <div class="col s12 m5 container">
+        <!-- right column -->
+        <!-- star ratings-->
+        <div class="center custom-padding2">
+        {% for n in range(score)%}
+        <i class="medium custom-star material-icons">star</i>
+        {% endfor %}
+        <p class="custom-text">({{ rating_count }} rating(s))</p>
+        <p class="custom-text">({{ score }} star(s))</p>
+        </div>
+        <!-- rate show if logged in -->
+        {% if session.user %}
+            {% if not existing_rating %}
+                <div class="center custom-padding2">
+                    <h4 class="custom-text">Rate this show</h4>
+                    <form action = "{{ url_for('rating', show_id=show.id, rating_no=1) }}" method = "POST" class="inline">
+                    <button type="submit" value="submit" class="star-btn-background"><i class="medium custom-star material-icons star-rating" id = "star-rating1" onmouseover="starChange1()" onmouseout="star1()">star_border</i></button>
+                    </form>
+                    <form action = "{{ url_for('rating', show_id=show.id, rating_no=2)  }}" method = "POST" class="inline">
+                    <button type="submit" value="submit" class="star-btn-background"><i class="medium custom-star material-icons star-rating" id = "star-rating2" onmouseover="starChange2()" onmouseout="star2()">star_border</i></button>
+                    </form>
+                    <form action = "{{ url_for('rating', show_id=show.id, rating_no=3)  }}" method = "POST" class="inline">
+                    <button type="submit" value="submit" class="star-btn-background"><i class="medium custom-star material-icons star-rating" id = "star-rating3" onmouseover="starChange3()" onmouseout="star3()">star_border</i></button>
+                    </form>
+                    <form action = "{{ url_for('rating', show_id=show.id, rating_no=4)  }}" method = "POST" class="inline">
+                    <button type="submit" value="submit" class="star-btn-background"><i class="medium custom-star material-icons star-rating" id = "star-rating4" onmouseover="starChange4()" onmouseout="star4()">star_border</i></button>
+                    </form>
+                    <form action = "{{ url_for('rating', show_id=show.id, rating_no=5)  }}" method = "POST" class="inline">
+                    <button type="submit" value="submit" class="star-btn-background"><i class="medium custom-star material-icons star-rating" id = "star-rating5" onmouseover="starChange5()" onmouseout="star5()">star_border</i></button>
+                    </form>
+                </div>
+            {% else %}
+                <div class="center custom-padding2">
+                    <h4 class="custom-text">You rated this show. Go to your <a href="{{ url_for('profile', username=session['user']) }}">profile</a> to see your ratings.</h4>
+                </div>
+            {% endif %}
+
+
+    <!--add a review button if logged in-->
+            {% if not already_reviewed %}
+                <div class="margin-custom-review custom-padding2 center custom-padding3">
+                    <div><h3 class="custom-text">Add a Review</h3></div>
+                
+                <form action = "{{ url_for('addreview', show_id=show.id) }}" method = "POST"> 
+                    <div class="input-field custom-text">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <textarea id="review" class="custom-text custom-textarea" name="review"></textarea>
+                    <label for="review">Review</label>
+                    </div>
+                    <div class="input-field custom-text center">
+                        <button class="btn waves-effect waves-light colour-yellow" type="submit">Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>    
+                </div>
+            {% else %}
+            <div class="margin-custom-review custom-padding2 custom-padding3 center">
+                 <div><h4 class="custom-text">You have reviewed this show. Go to your <a href="{{ url_for('profile', username=session['user']) }}">profile</a> to see your reviews.</h4></div>
+            </div>
+            {% endif %}
+                <!-- Favourite the show -->
+                <div class="center custom-padding2">
+                    <form action = "{{ url_for('favourite', username=session['user'], show_id=show.id) }}" method = "POST">
+                <button type="submit" value="submit" class="star-btn-background"><i class="material-icons medium custom-fav" id="favorite">{{ favourite }}</i></button>
+                </form>
+                </div>
+      {% else %}
+      <div class="center custom-padding2 offset-s1"><h3 class="custom-text"><a href="{{ url_for('login') }}">Login</a> to add a review</h3></div>
+      {% endif %}  
+     
+
+      
+     </div>
+     
+     </div>
+  
    
   
     <!-- The show synopsis -->
@@ -109,7 +119,7 @@
         <div class="card-content black-text">
           <span class="card-title custom-text"><h3>Reviews:</h3></span>
           {% for x in reviews %}
-            <h5 class="custom-text">{{ x.review }}</h5>
+            <h5 class="custom-text">{{ x.review }}</h5><br>
             <h6 class="custom-text">by: {{ x.review_by }}</h6>
             <div class="divider"></div>
          {% endfor %}
