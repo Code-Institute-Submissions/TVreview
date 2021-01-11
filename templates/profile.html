@@ -35,7 +35,16 @@
     </div>
 </div>
 <div class="row">
-    <button type="button"><a href="#">Edit My Details</a></button>
+    <div class="col s6">
+        {% if session['global_show_id'] %}
+        <p class="custom-text">Go back to previously viewed tvshow</p>
+        <a href="{{ url_for('tvshow', show_id=session['global_show_id']) }}"><button class="my-btns custom-text">Previous tv show</button></a>
+        {% endif %}
+    </div>
+    <div class="col s6 center">
+    <a href="#"><button type="button" class="my-btns custom-text">Edit My Details</button></a>
+    </div>
+    
 </div>
 </section>
 {% endblock %}

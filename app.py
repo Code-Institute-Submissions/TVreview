@@ -18,6 +18,8 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+login_user = False
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -65,6 +67,8 @@ def login():
             if check_password_hash(
                 existing_user["password"], request.form.get("password")):
                     session["user"] = request.form.get("username").lower()
+                    global login_user
+                    login_user = True
                     return redirect(url_for(
                         'loggedin'))
             else:
@@ -100,6 +104,8 @@ def profile(username):
 @app.route("/logout")
 def logout():
     session.pop("user")
+    global login_user
+    login_user = False
     return redirect(url_for('login'))
 
 
@@ -141,20 +147,28 @@ def tvshow(show_id):
     else:
         score = 0
     # favourite heart filled in if a favourite
-    favourite = "favorite_border"  
-    existing_favourite = mongo.db.favourites.find_one(
-            {"user": session["user"], "favourite": show_id})
-    if existing_favourite:
-        favourite = "favorite"
-    # Hide ratings and reviews if already done
-    existing_rating = mongo.db.ratings.find_one(
-            {"rating_by": session["user"], "rating_for": show_id})
-    already_reviewed = mongo.db.reviews.find_one({"review_by": session["user"],
-    "review_for": show_id})
-    return render_template("tvshow.html", 
-    show=show, reviews=reviews, rating_count=rating_count, 
-    score=score, favourite=favourite, existing_rating=existing_rating, 
-    already_reviewed=already_reviewed)
+    favourite = "favorite_border"
+    global login_user
+    if login_user:
+        existing_favourite = mongo.db.favourites.find_one(
+                {"user": session["user"], "favourite": show_id})
+        if existing_favourite:
+            favourite = "favorite"
+        # Hide ratings and reviews if already done
+        existing_rating = mongo.db.ratings.find_one(
+                {"rating_by": session["user"], "rating_for": show_id})
+        already_reviewed = mongo.db.reviews.find_one(
+            {"review_by": session["user"], "review_for": show_id})
+        print(login_user)
+        return render_template("tvshow.html",
+        show=show, reviews=reviews, rating_count=rating_count,
+        score=score, favourite=favourite, existing_rating=existing_rating,
+        already_reviewed=already_reviewed)
+    else:
+        print(login_user)
+        return render_template("tvshow.html",
+        show=show, reviews=reviews, rating_count=rating_count,
+        score=score, favourite=favourite)
 
 
 @app.route('/addreview/<show_id>', methods=['GET', 'POST'])

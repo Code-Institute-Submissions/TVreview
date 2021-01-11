@@ -164,6 +164,13 @@
     height: 100px;
 
 }
+
+/*---------profile------------------*/
+.my-btns {
+    background-color: #3a3a3a;
+    border: solid black 1px;
+    border-radius: 2px;
+}
 /*----------bottom of the page----------*/
 
 .similar-image {

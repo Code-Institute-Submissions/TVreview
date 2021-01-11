@@ -3,17 +3,18 @@
 {% block content %}
 <section class="section1b custom-padding">
 <div class="row">
-    <h5 class="custom-text center col s6">Welcome {{ username }}</h5>
+    <h5 class="custom-text center col s12">Welcome {{ username }}</h5>
 </div>
 <div class="row">
-    <div class="col s6">
+    <div class="col s6 center">
         {% if session['global_show_id'] %}
         <p class="custom-text">Go back to previously viewed tvshow</p>
-        <a href="{{ url_for('tvshow', show_id=session['global_show_id']) }}"><button>Previous tv show</button></a>
+        <a href="{{ url_for('tvshow', show_id=session['global_show_id']) }}"><button class="my-btns custom-text">Previous tv show</button></a>
         {% endif %}
     </div>
-    <div class="col s6">
-        <a href="{{ url_for('profile', username=username) }}"><button>Profile</button></a>
+    <div class="col s6 center">
+        <p class="custom-text">Go to your profile</p>
+        <a href="{{ url_for('profile', username=username) }}"><button class="my-btns custom-text">Profile</button></a>
     </div>
 </div>
 </section>
