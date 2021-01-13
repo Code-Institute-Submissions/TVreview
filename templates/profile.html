@@ -42,7 +42,7 @@
         {% endif %}
     </div>
     <div class="col s6 center">
-    <a href="#"><button type="button" class="my-btns custom-text">Edit My Details</button></a>
+    <a href="{{ url_for('edit_user', username=session['user']) }}"><button type="button" class="my-btns custom-text">Edit My Details</button></a>
     </div>
     
 </div>

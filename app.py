@@ -20,15 +20,37 @@ mongo = PyMongo(app)
 
 login_user = False
 
+# Home page
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     return render_template("index.html")
 
 
+@app.route("/search/<searchterm>")
+def search(searchterm):
+    response = requests.get('https://imdb-api.com/API/SearchSeries/',
+    {"apikey": os.environ.get("APIKEY"), "expression": searchterm})
+    searchresults = response.json()
+    return render_template('search.html', searchresults=searchresults)
+
+
+@app.route("/searchredirect", methods=["GET", "POST"])
+def searchRedirect():
+    searchterm = request.form.get("search")
+    return redirect(url_for('search', searchterm=searchterm))
+
+
+# error
+
+
 @app.route("/error")
 def error():
     return render_template("error.html")
+
+
+# User Login/ signup
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -87,6 +109,17 @@ def loggedin():
     return render_template("loggedin.html", username=session["user"])
 
 
+@app.route("/logout")
+def logout():
+    session.pop("user")
+    global login_user
+    login_user = False
+    return redirect(url_for('login'))
+
+
+# user profile
+
+
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     # get user's username from database
@@ -101,26 +134,49 @@ def profile(username):
     return redirect(url_for('login'))
 
 
-@app.route("/logout")
-def logout():
-    session.pop("user")
-    global login_user
-    login_user = False
-    return redirect(url_for('login'))
+@app.route("/edit_user/<username>", methods=["GET", "POST"])
+def edit_user(username):
+    user = mongo.db.users.find(
+            {"username": session["user"]})
+    if request.method == "POST":
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+        existing_email = mongo.db.users.find_one(
+            {"email": request.form.get("email").lower()})
 
+        if existing_user or existing_email:
+            flash("Username/ Email already exists")
+            redirect(url_for('edit_user', username=session["user"]))
+        else:
+            edit = {
+                "username": request.form.get("username").lower(),
+                "email": request.form.get("email").lower(),
+                # "password": generate_password_hash
+                # (request.form.get("password"))
+            }
+            # username in other parts of database
+            user_data_fav = {
+                "user": request.form.get("username").lower()
+            }
+            user_data_rev = {
+                "review_by": request.form.get("username").lower()
+            }
+            user_data_rat = {
+                "rating_by": request.form.get("username").lower()
+            }
+            query1 = {"user": session["user"]}
+            query2 = {"review_by": session["user"]}
+            query3 = {"rating_by": session["user"]}
+            mongo.db.favourites.update_many(query1, user_data_fav)
+            mongo.db.reviews.update_many(query2, user_data_rev)
+            mongo.db.ratings.update_many(query3, user_data_rat)
 
-@app.route("/search/<searchterm>")
-def search(searchterm):
-    response = requests.get('https://imdb-api.com/API/SearchSeries/',
-    {"apikey": os.environ.get("APIKEY"), "expression": searchterm})
-    searchresults = response.json()
-    return render_template('search.html', searchresults=searchresults)
-
-
-@app.route("/searchredirect", methods=["GET", "POST"])
-def searchRedirect():
-    searchterm = request.form.get("search")
-    return redirect(url_for('search', searchterm=searchterm))
+            mongo.db.users.update({"username": session["user"]}, edit)
+            session["user"] = request.form.get("username").lower()
+            # Success
+            flash("Successfully Edited")
+            return redirect(url_for('profile', username=session["user"]))
+    return render_template("edit.html", username=session["user"], user=user)
 
 
 @app.route("/tvshow/<show_id>")
