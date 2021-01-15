@@ -139,42 +139,21 @@ def edit_user(username):
     user = mongo.db.users.find(
             {"username": session["user"]})
     if request.method == "POST":
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
         existing_email = mongo.db.users.find_one(
             {"email": request.form.get("email").lower()})
 
-        if existing_user or existing_email:
-            flash("Username/ Email already exists")
+        if existing_email:
+            flash("There was an error updating your email")
             redirect(url_for('edit_user', username=session["user"]))
         else:
-            edit = {
-                "username": request.form.get("username").lower(),
-                "email": request.form.get("email").lower(),
-                # "password": generate_password_hash
-                # (request.form.get("password"))
-            }
-            # username in other parts of database
-            user_data_fav = {
-                "user": request.form.get("username").lower()
-            }
-            user_data_rev = {
-                "review_by": request.form.get("username").lower()
-            }
-            user_data_rat = {
-                "rating_by": request.form.get("username").lower()
-            }
-            query1 = {"user": session["user"]}
-            query2 = {"review_by": session["user"]}
-            query3 = {"rating_by": session["user"]}
-            mongo.db.favourites.update_many(query1, user_data_fav)
-            mongo.db.reviews.update_many(query2, user_data_rev)
-            mongo.db.ratings.update_many(query3, user_data_rat)
-
-            mongo.db.users.update({"username": session["user"]}, edit)
-            session["user"] = request.form.get("username").lower()
-            # Success
-            flash("Successfully Edited")
+            try:
+                myemail = {"email": request.form.get("email").lower()}
+                newemail = {"$set": 
+                {"email": request.form.get("email").lower()}}
+                mongo.db.users.update_one(myemail, newemail)
+                flash("Successfully Edited")
+            except Exception:
+                return redirect(url_for("error"))
             return redirect(url_for('profile', username=session["user"]))
     return render_template("edit.html", username=session["user"], user=user)
 

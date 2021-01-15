@@ -3,17 +3,11 @@
 {% block content %}
 <section class="section1">
 <div class="row">
-    <h3 class="custom-text center col s6">Edit {{ username }}</h3>
+    <h3 class="custom-text center col s6">Edit {{ username }}'s Email Address</h3>
 </div>
 
 <div class="row container">
     <form action = "{{ url_for('edit_user', username=session['user']) }}" method = "POST" class="col s12">
-        <div class="row">
-            <div class="input-field col s6">
-                <input id="username" type="text" name="username" class="validate custom-text" maxlength="15" minlength="5" pattern="^[a-zA-Z0-9]{5,15}$" value="{{ username }}">
-                <label for="username">Username</label>
-            </div>
-        </div>
         {% for profile in user %}
       <div class="row">
         <div class="input-field custom-text col s6">
@@ -21,12 +15,6 @@
           <label for="email">Email</label>
         </div>
       </div>
-      <!-- <div class="row">
-        <div class="input-field col s6">
-          <input id="password" type="password" class="validate custom-text" name="password" maxlength="15" minlength="5" pattern="^[a-zA-Z0-9]{5,15}$" value="{{ profile.password }}">
-          <label for="password">Password</label>
-        </div>
-      </div> -->
       {% endfor %}
       <div>
         <button class="btn waves-effect waves-light colour-yellow" type="submit">Edit
