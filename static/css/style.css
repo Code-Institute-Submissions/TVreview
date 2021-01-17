@@ -48,7 +48,7 @@
 }
 
 .custom-padding2 {
-    padding-top: 40px;
+    padding-top: 40px!important;
 }
 
 .custom-padding3 {
@@ -172,6 +172,7 @@
     border: solid black 1px;
     border-radius: 2px;
 }
+
 /*----------bottom of the page----------*/
 
 .similar-image {

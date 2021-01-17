@@ -2,10 +2,17 @@
 
 {% block content %}
 <section class="section1b">
-<div class="center custom-padding">
+    <div class="row custom-padding2">
+        <div class="col s12 center ">
+            <h3 class="custom-text">Results:</h3>
+        </div>
+    </div>
+    <div class="row custom-padding2">
+<div class="col s12 m6 custom-padding offset-m3 center">
 {% for searchresult in searchresults.results %}
-        <a href="{{ url_for('tvshow', show_id=searchresult['id']) }}" class="custom-text text-border">{{ searchresult['title'] }}<br></a>
+        <h5><a href="{{ url_for('tvshow', show_id=searchresult['id']) }}" class="custom-text">{{ searchresult['title'] }}<br><hr></a></h5>
 {% endfor %}
+</div>
 </div>
 </section>
 {% endblock %}

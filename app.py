@@ -134,28 +134,25 @@ def profile(username):
     return redirect(url_for('login'))
 
 
-@app.route("/edit_user/<username>", methods=["GET", "POST"])
-def edit_user(username):
-    user = mongo.db.users.find(
-            {"username": session["user"]})
+@app.route("/edit_reviews/<username>/<title>/<show_id>", 
+methods=["GET", "POST"])
+def edit_reviews(username, title, show_id):
+    title = title
+    show_id = show_id
+    username = username
     if request.method == "POST":
-        existing_email = mongo.db.users.find_one(
-            {"email": request.form.get("email").lower()})
-
-        if existing_email:
-            flash("There was an error updating your email")
-            redirect(url_for('edit_user', username=session["user"]))
-        else:
-            try:
-                myemail = {"email": request.form.get("email").lower()}
-                newemail = {"$set": 
-                {"email": request.form.get("email").lower()}}
-                mongo.db.users.update_one(myemail, newemail)
-                flash("Successfully Edited")
-            except Exception:
-                return redirect(url_for("error"))
-            return redirect(url_for('profile', username=session["user"]))
-    return render_template("edit.html", username=session["user"], user=user)
+        edited_review = {"$set": {
+            "review_for": show_id,
+            "title": title,
+            "review": request.form.get("edit_review"),
+            "review_by": session["user"]
+        }}
+        old_review = {"review_by": session["user"], "review_for": show_id}
+        mongo.db.reviews.update_one(old_review, edited_review)
+        flash("Successfully Edited")
+        return redirect(url_for('profile', username=session["user"]))
+    return render_template("edit.html", 
+    title=title, show_id=show_id, username=username)
 
 
 @app.route("/tvshow/<show_id>")

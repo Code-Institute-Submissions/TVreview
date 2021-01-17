@@ -3,31 +3,22 @@
 {% block content %}
 <section class="section1">
 <div class="row">
-    <h3 class="custom-text center col s6">Edit {{ username }}'s Email Address</h3>
+    <h3 class="custom-text center col s12 custom-padding2">Edit Your Review</h3>
 </div>
-
-<div class="row container">
-    <form action = "{{ url_for('edit_user', username=session['user']) }}" method = "POST" class="col s12">
-        {% for profile in user %}
-      <div class="row">
-        <div class="input-field custom-text col s6">
-          <input id="email" type="email" class="validate custom-text" name="email" value="{{ profile.email }}">
-          <label for="email">Email</label>
+<div class="margin-custom-review custom-padding2 center custom-padding3">
+    <div class="margin-top1"><h5 class="custom-text">{{ title }}</h5></div>          
+        <form action = "{{ url_for('edit_reviews', username=username, title=title, show_id=show_id) }}" method = "POST" class="margin-top1"> 
+            <div class="input-field custom-text">
+            <i class="material-icons prefix">mode_edit</i>
+            <textarea id="edit_review" class="custom-text custom-textarea" name="edit_review" value="{{ review }}"></textarea>
+            <label for="edit_review">Edit Review</label>
+            </div>
+            <div class="input-field custom-text center">
+                <button class="btn waves-effect waves-light colour-yellow" type="submit">Edit
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>    
         </div>
-      </div>
-      {% endfor %}
-      <div>
-        <button class="btn waves-effect waves-light colour-yellow" type="submit">Edit
-            <i class="material-icons right">send</i>
-        </button>
-    </div>
-    </form>
-    
-</div>
-<div class="row">
-    <button class="btn waves-effect waves-light colour-red" type="submit">Cancel
-            <i class="material-icons right">clear</i>
-        </button>
-</div>
 </section>
 {% endblock %}
