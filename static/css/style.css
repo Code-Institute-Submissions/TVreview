@@ -133,7 +133,7 @@
 }
 
 .custom-card-review {
-    background-color: rgba(114, 114, 114, 0.7);
+    background-color: #3a3a3a;
     margin: 10% 0%;
 }
 
@@ -142,7 +142,7 @@
 }
 /*-----------reviews---------------*/
 .custom-star {
-    color: rgb(161, 161, 4);
+    color: rgb(161, 161, 4); 
 }
 
 .custom-fav {
