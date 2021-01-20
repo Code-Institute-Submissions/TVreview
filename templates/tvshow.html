@@ -3,7 +3,7 @@
 {% block content %}
 <section class="section1">
     {{ rating }}
-    <div class="row">
+    <div class="row row-custom">
         <!-- left column -->
           <!-- Details of the show including image -->
     <div class="col s12 m6">
@@ -13,9 +13,9 @@
         </div>
         <div class="card-content">
           <h5 class="custom-text">{{ show.fullTitle }}</h5>
-          <h5 class="custom-text">Genre: {{ show.genres }} </h5>
-          <h5 class="custom-text">Country: {{ show.countries }}</h5>
-          <h5 class="custom-text">Starring: {{ show.stars }}</h5>
+          <h5 class="custom-text">Genre:</h5> <p class="custom-text">{{ show.genres }}</p> 
+          <h5 class="custom-text">Country:</h5> <p class="custom-text">{{ show.countries }}</p>
+          <h5 class="custom-text">Starring:</h5> <p class="custom-text">{{ show.stars }}</p>
         </div>
       </div>
      </div>
@@ -30,7 +30,7 @@
                 </div>
         <!-- star ratings-->
         <div class="center custom-padding2">
-        {% for n in range(score)%}
+        {% for n in range(score) %}
         <i class="medium custom-star material-icons">star</i>
         {% endfor %}
         <p class="custom-text">({{ rating_count }} rating(s))</p>
@@ -58,19 +58,20 @@
                 </div>
             {% else %}
                 <div class="center custom-padding2">
-                    <h4 class="custom-text">You rated this show. Go to your <a href="{{ url_for('profile', username=session['user']) }}">profile</a> to see your ratings.</h4>
+                    <h5 class="custom-text">You rated this show. Go to your <a href="{{ url_for('profile', username=session['user']) }}">profile</a> to see your ratings.</h5>
                 </div>
             {% endif %}
-    </div>
+    
       {% else %}
-      <div class="center custom-padding2 offset-s1"><h3 class="custom-text"><a href="{{ url_for('login') }}">Login</a> to rate and review</h3></div>
+      <div class="center custom-padding2 offset-s1"><h4 class="custom-text"><a href="{{ url_for('login') }}">Login</a> to rate and review</h4></div>
       {% endif %}
     <!-- viewing the reviews --> 
-        <div class="card-content black-text center custom-padding2">
-          <span class="card-title custom-text"><h3>Reviews:</h3></span>
+    <div class="center">
+        <div class="card hoverable custom-card-review center custom-padding4">
+          <span class="card-title custom-text"><h4>Reviews:</h4></span>
           {% for x in reviews %}
           {% if x.review %}
-            <h5 class="custom-text">{{ x.review }}</h5><br>
+            <h5 class="review-text margin-top1">{{ x.review }}</h5><br>
             <h6 class="custom-text">by: {{ x.review_by }}</h6>
             <div class="divider"></div>
             {% else %}
@@ -78,8 +79,9 @@
             <div class="divider"></div>
             {% endif %}
          {% endfor %}
+         </div>
      </div>
-     
+     </div>
      </div>
   
    
@@ -93,7 +95,7 @@
         </div>
       </div>
     </div>
-   
+   </div>
     
 </section>
 
@@ -129,7 +131,7 @@
     
       <div class="row">
           <div class="col s12">
-        <h3 class="custom-text">If you like this, try:</h3>
+        <h4 class="custom-text">If you like this, try:</h4>
         </div>
     </div>
         <div class="row">

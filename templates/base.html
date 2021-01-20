@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Xanh+Mono&display=swap" rel="stylesheet">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src= "{{ url_for('static', filename='js/script.js') }}" type="text/javascript"></script>
 </head>
@@ -43,13 +44,6 @@
 
     <section class="section1">
     <header class="title">What 2 Watch</header>
-    </section>
-    {% block content %}
-    
-   
-     
-    {% endblock %}
-    <section>
     <!--flash messages-->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -59,6 +53,11 @@
             {% endif %}
         {% endwith %}
     </section>
+    {% block content %}
+    
+   
+     
+    {% endblock %}
 
      <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

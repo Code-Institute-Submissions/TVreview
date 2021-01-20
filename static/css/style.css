@@ -16,15 +16,20 @@
 .section1 {
     background-color: #14213D;
     height: 100%;
+    overflow: hidden;
 }
+
 
 .section1b {
     background-color: #14213D;
     height: 100vh;
+    overflow: hidden;
 }
+
 
 .section2 {
     background-color: #3a3a3a;
+    overflow: hidden;
 }
 
 .colour-yellow {
@@ -54,6 +59,14 @@
 .custom-padding3 {
     padding-right: 10px;
     padding-left: 10px;
+}
+
+.custom-padding4 {
+    padding: 5px 0px;
+}
+
+.custom-padding5 {
+    padding-bottom: 30px;
 }
 
 .margin-top1 {
@@ -134,7 +147,8 @@
 
 .custom-card-review {
     background-color: #3a3a3a;
-    margin: 10% 0%;
+    margin: 10% auto;
+    width: 80%;
 }
 
 .custom-card-plot {
@@ -153,17 +167,21 @@
     margin: 100px 0px;
 }
 
+.review-text {
+    font-family: 'Caveat', cursive;
+    color: #e5e5e5;
+    margin-bottom: 0px;
+}
+
 .star-btn-background {
      border: 0;
     background: none;
     box-shadow: none;
-    border-radius: 0px;
-    
+    border-radius: 0px;   
 }
 
 .custom-textarea {
     height: 100px;
-
 }
 
 /*---------profile------------------*/

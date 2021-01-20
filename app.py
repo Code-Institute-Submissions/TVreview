@@ -155,6 +155,23 @@ def edit_reviews(username, title, show_id):
     title=title, show_id=show_id, username=username)
 
 
+@app.route("/delete_review/<username>/<title>/<show_id>", 
+methods=["GET", "POST"])
+def delete_review(username, title, show_id):
+    title = title
+    show_id = show_id
+    username = username
+    if request.method == "POST":
+        delete_your_review = {
+            "review_for": show_id,
+            "title": title,
+            "review_by": session["user"]
+        }
+        mongo.db.reviews.delete_one(delete_your_review)
+    return redirect(url_for('profile', 
+    username=session["user"],title=title, show_id=show_id,))
+
+
 @app.route("/tvshow/<show_id>")
 def tvshow(show_id):
     tvresponse = requests.get('https://imdb-api.com/en/API/Title/',
