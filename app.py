@@ -161,15 +161,14 @@ def delete_review(username, title, show_id):
     title = title
     show_id = show_id
     username = username
-    if request.method == "POST":
-        delete_your_review = {
-            "review_for": show_id,
-            "title": title,
-            "review_by": session["user"]
-        }
-        mongo.db.reviews.delete_one(delete_your_review)
+    delete_your_review = mongo.db.reviews.find_one({
+        "review_for": show_id,
+        "title": title,
+        "review_by": session["user"]
+    })
+    mongo.db.reviews.delete_one(delete_your_review)
     return redirect(url_for('profile', 
-    username=session["user"],title=title, show_id=show_id,))
+    username=session["user"], title=title, show_id=show_id,))
 
 
 @app.route("/tvshow/<show_id>")
@@ -182,7 +181,7 @@ def tvshow(show_id):
     # show the reviews
     review_coll = mongo.db.reviews
     review_query = {"review_for": show_id}
-    reviews = review_coll.find(review_query)
+    reviews = review_coll.find(review_query).limit(3)
     # show total number of ratings
     rating = mongo.db.ratings.find({"rating_for": show_id})
     rating_count = rating.count()
@@ -208,13 +207,11 @@ def tvshow(show_id):
                 {"rating_by": session["user"], "rating_for": show_id})
         already_reviewed = mongo.db.reviews.find_one(
             {"review_by": session["user"], "review_for": show_id})
-        print(login_user)
         return render_template("tvshow.html",
         show=show, reviews=reviews, rating_count=rating_count,
         score=score, favourite=favourite, existing_rating=existing_rating,
         already_reviewed=already_reviewed)
     else:
-        print(login_user)
         return render_template("tvshow.html",
         show=show, reviews=reviews, rating_count=rating_count,
         score=score, favourite=favourite)
@@ -281,6 +278,13 @@ def favourite(username, show_id):
             except Exception:
                 return redirect(url_for("error"))
 
+
+@app.route('/allreviews/<show_id>')
+def allreviews(show_id):
+    review_coll = mongo.db.reviews
+    review_query = {"review_for": show_id}
+    reviews = review_coll.find(review_query)
+    return render_template('allreviews.html', reviews=reviews)
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
