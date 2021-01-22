@@ -1,24 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="section1">
+<section class="section1b">
 <div class="row">
     <h3 class="custom-text center col s12 custom-padding2">Edit Your Review</h3>
 </div>
-<div class="margin-custom-review custom-padding2 center custom-padding3">
-    <div class="margin-top1"><h5 class="custom-text">{{ title }}</h5></div>          
-        <form action = "{{ url_for('edit_reviews', username=username, title=title, show_id=show_id) }}" method = "POST" class="margin-top1"> 
+<div class="margin-custom-review custom-padding2 center custom-padding3 row">
+    <div class="margin-top1 col s12 center"><h5 class="custom-text">{{ title }}</h5></div>
+</div>          
+        <form action = "{{ url_for('edit_reviews', username=username, title=title, show_id=show_id, review=review) }}" method = "POST" class="margin-top1"> 
             <div class="input-field custom-text">
             <i class="material-icons prefix">mode_edit</i>
-            <textarea id="edit_review" class="custom-text custom-textarea" name="edit_review" value="{{ review }}"></textarea>
+            <textarea id="edit_review" class="custom-text custom-textarea" name="edit_review"> {{ review }}</textarea>
             <label for="edit_review">Edit Review</label>
             </div>
-            <div class="input-field custom-text center">
+            <div class="input-field custom-text center row custom-padding5">
+                <div class="col s6">
                 <button class="btn waves-effect waves-light colour-yellow" type="submit">Edit
                     <i class="material-icons right">send</i>
                 </button>
             </div>
-        </form>    
-        </div>
+            <div class="col s6"> 
+            <a href="{{ url_for('profile', username=username) }}"><button class="btn waves-effect waves-light colour-red" type="button">Cancel
+                <i class="material-icons right">close</i>
+            </button></a></div> 
+            </div>
+        </form>
+           
+        
+        
 </section>
 {% endblock %}

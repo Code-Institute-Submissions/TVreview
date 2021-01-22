@@ -102,6 +102,18 @@ the next function.
 - It would have been frustrating for the user to login on the tvshow.html and then have to press the back button to get back. In order to get back to the tv show they last looked at,
 I created a session variable for the tv show id.
 - Having moved elements around on tvshow.html, there appeared a white space between the sections. Using overflow: none fixed it.
+### Manuel Testing
+#### Nav Links
+- Home nav links go to the correct places.
+- Login and Sign up nav links working and buttons between the two.
+#### Login and Sign up
+- Password validator works.
+- Check if username/ email exists works.
+- Sign Up, logout, login works.
+
+#### Profile
+- Link to profile from logged in page works.
+- 
 
 ## Deployment
 

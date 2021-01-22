@@ -134,12 +134,13 @@ def profile(username):
     return redirect(url_for('login'))
 
 
-@app.route("/edit_reviews/<username>/<title>/<show_id>", 
+@app.route("/edit_reviews/<username>/<title>/<show_id>/<review>", 
 methods=["GET", "POST"])
-def edit_reviews(username, title, show_id):
+def edit_reviews(username, title, show_id, review):
     title = title
     show_id = show_id
     username = username
+    review = review
     if request.method == "POST":
         edited_review = {"$set": {
             "review_for": show_id,
@@ -152,7 +153,7 @@ def edit_reviews(username, title, show_id):
         flash("Successfully Edited")
         return redirect(url_for('profile', username=session["user"]))
     return render_template("edit.html", 
-    title=title, show_id=show_id, username=username)
+    title=title, show_id=show_id, username=username, review=review)
 
 
 @app.route("/delete_review/<username>/<title>/<show_id>", 
