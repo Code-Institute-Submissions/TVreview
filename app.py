@@ -50,7 +50,7 @@ def error():
     return render_template("error.html")
 
 
-# User Login/ signup
+# User Login/ signup. Used Code Institute module for help.
 
 
 @app.route("/signup", methods=["GET", "POST"])
