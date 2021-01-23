@@ -1,147 +1,189 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <section class="section1">
     {{ rating }}
-    <div class="row row-custom">
-        <!-- left column -->
-          <!-- Details of the show including image -->
-    <div class="col s12 m6">
-      <div class="card hoverable custom-card-image">
-        <div class="card-image">
-          <img src="{{ show.image }}">
-        </div>
-        <div class="card-content">
-          <h5 class="custom-text">{{ show.fullTitle }}</h5>
-          <h5 class="custom-text">Genre:</h5> <p class="custom-text">{{ show.genres }}</p> 
-          <h5 class="custom-text">Country:</h5> <p class="custom-text">{{ show.countries }}</p>
-          <h5 class="custom-text">Starring:</h5> <p class="custom-text">{{ show.stars }}</p>
-        </div>
-      </div>
-     </div>
-   
-    <div class="col s12 m5 container">
-        <!-- right column -->
-        <!-- Favourite the show -->
-                <div class="center custom-padding2">
-                    <form action = "{{ url_for('favourite', username=session['user'], show_id=show.id) }}" method = "POST">
-                <button type="submit" value="submit" class="star-btn-background"><i class="material-icons medium custom-fav" id="favorite">{{ favourite }}</i></button>
-                </form>
-                </div>
-        <!-- star ratings-->
-        <div class="center custom-padding2">
+    
+	<div class="row row-custom">
+		<!-- left column -->
+		<!-- Details of the show including image -->
+		<div class="col s12 m6">
+			<div class="card hoverable custom-card-image">
+				<div class="card-image">
+					<img src="{{ show.image }}">
+					</div>
+					<div class="card-content">
+						<h5 class="custom-text">{{ show.fullTitle }}</h5>
+						<h5 class="custom-text">Genre:</h5>
+						<p class="custom-text">{{ show.genres }}</p>
+						<h5 class="custom-text">Country:</h5>
+						<p class="custom-text">{{ show.countries }}</p>
+						<h5 class="custom-text">Starring:</h5>
+						<p class="custom-text">{{ show.stars }}</p>
+					</div>
+				</div>
+			</div>
+			<div class="col s12 m5 container">
+				<!-- right column -->
+				<!-- Favourite the show -->
+				<div class="center custom-padding2">
+					<form action = "{{ url_for('favourite', username=session['user'], show_id=show.id) }}" method = "POST">
+						<button type="submit" value="submit" class="star-btn-background">
+							<i class="material-icons medium custom-fav" id="favorite">{{ favourite }}</i>
+						</button>
+					</form>
+				</div>
+				<!-- star ratings-->
+				<div class="center custom-padding2">
         {% for n in range(score) %}
-        <i class="medium custom-star material-icons">star</i>
+        
+					<i class="medium custom-star material-icons">star</i>
         {% endfor %}
-        <p class="custom-text">({{ rating_count }} rating(s))</p>
-        </div>
-        <!-- rate show if logged in -->
+        
+					<p class="custom-text">({{ rating_count }} rating(s))</p>
+				</div>
+				<!-- rate show if logged in -->
         {% if session.user %}
             {% if not existing_rating %}
-                <div class="center custom-padding2">
-                    <h4 class="custom-text">Rate this show</h4>
-                    <form action = "{{ url_for('rating', show_id=show.id, rating_no=1) }}" method = "POST" class="inline">
-                    <button type="submit" value="submit" class="star-btn-background"><i class="medium custom-star material-icons star-rating" id = "star-rating1" onmouseover="starChange1()" onmouseout="star1()">star_border</i></button>
-                    </form>
-                    <form action = "{{ url_for('rating', show_id=show.id, rating_no=2)  }}" method = "POST" class="inline">
-                    <button type="submit" value="submit" class="star-btn-background"><i class="medium custom-star material-icons star-rating" id = "star-rating2" onmouseover="starChange2()" onmouseout="star2()">star_border</i></button>
-                    </form>
-                    <form action = "{{ url_for('rating', show_id=show.id, rating_no=3)  }}" method = "POST" class="inline">
-                    <button type="submit" value="submit" class="star-btn-background"><i class="medium custom-star material-icons star-rating" id = "star-rating3" onmouseover="starChange3()" onmouseout="star3()">star_border</i></button>
-                    </form>
-                    <form action = "{{ url_for('rating', show_id=show.id, rating_no=4)  }}" method = "POST" class="inline">
-                    <button type="submit" value="submit" class="star-btn-background"><i class="medium custom-star material-icons star-rating" id = "star-rating4" onmouseover="starChange4()" onmouseout="star4()">star_border</i></button>
-                    </form>
-                    <form action = "{{ url_for('rating', show_id=show.id, rating_no=5)  }}" method = "POST" class="inline">
-                    <button type="submit" value="submit" class="star-btn-background"><i class="medium custom-star material-icons star-rating" id = "star-rating5" onmouseover="starChange5()" onmouseout="star5()">star_border</i></button>
-                    </form>
-                </div>
+                
+				<div class="center custom-padding2">
+					<h4 class="custom-text">Rate this show</h4>
+					<form action = "{{ url_for('rating', show_id=show.id, rating_no=1) }}" method = "POST" class="inline">
+						<button type="submit" value="submit" class="star-btn-background">
+							<i class="medium custom-star material-icons star-rating" id = "star-rating1" onmouseover="starChange1()" onmouseout="star1()">star_border</i>
+						</button>
+					</form>
+					<form action = "{{ url_for('rating', show_id=show.id, rating_no=2)  }}" method = "POST" class="inline">
+						<button type="submit" value="submit" class="star-btn-background">
+							<i class="medium custom-star material-icons star-rating" id = "star-rating2" onmouseover="starChange2()" onmouseout="star2()">star_border</i>
+						</button>
+					</form>
+					<form action = "{{ url_for('rating', show_id=show.id, rating_no=3)  }}" method = "POST" class="inline">
+						<button type="submit" value="submit" class="star-btn-background">
+							<i class="medium custom-star material-icons star-rating" id = "star-rating3" onmouseover="starChange3()" onmouseout="star3()">star_border</i>
+						</button>
+					</form>
+					<form action = "{{ url_for('rating', show_id=show.id, rating_no=4)  }}" method = "POST" class="inline">
+						<button type="submit" value="submit" class="star-btn-background">
+							<i class="medium custom-star material-icons star-rating" id = "star-rating4" onmouseover="starChange4()" onmouseout="star4()">star_border</i>
+						</button>
+					</form>
+					<form action = "{{ url_for('rating', show_id=show.id, rating_no=5)  }}" method = "POST" class="inline">
+						<button type="submit" value="submit" class="star-btn-background">
+							<i class="medium custom-star material-icons star-rating" id = "star-rating5" onmouseover="starChange5()" onmouseout="star5()">star_border</i>
+						</button>
+					</form>
+				</div>
             {% else %}
-                <div class="center custom-padding2">
-                    <h5 class="custom-text">You rated this show. Go to your <a href="{{ url_for('profile', username=session['user']) }}">profile</a> to see your ratings.</h5>
-                </div>
+                
+				<div class="center custom-padding2">
+					<h5 class="custom-text">You rated this show. Go to your 
+						<a href="{{ url_for('profile', username=session['user']) }}">profile</a> to see your ratings.
+					</h5>
+				</div>
             {% endif %}
     
       {% else %}
-      <div class="center custom-padding2 offset-s1"><h4 class="custom-text"><a href="{{ url_for('login') }}">Login</a> to rate and review</h4></div>
+      
+				<div class="center custom-padding2 offset-s1">
+					<h4 class="custom-text">
+						<a href="{{ url_for('login') }}">Login</a> to rate and review
+					</h4>
+				</div>
       {% endif %}
-    <!-- viewing the reviews --> 
-    <div class="center">
-        <div class="card hoverable custom-card-review center custom-padding4">
-          <span class="card-title custom-text"><h4>Reviews:</h4></span>
+    
+				<!-- viewing the reviews -->
+				<div class="center">
+					<div class="card hoverable custom-card-review center custom-padding4">
+						<span class="card-title custom-text">
+							<h4>Reviews:</h4>
+						</span>
           {% for x in reviews %}
           {% if x.review %}
-            <h5 class="review-text margin-top1">{{ x.review }}</h5><br>
-            <h6 class="custom-text">by: {{ x.review_by }}</h6>
-            <div class="divider"></div>
+            
+						<h5 class="review-text margin-top1">{{ x.review }}</h5>
+						<br>
+							<h6 class="custom-text">by: {{ x.review_by }}</h6>
+							<div class="divider"></div>
             {% else %}
-            <h5 class="custom-text">There are no reviews yet.</h5>
-            <div class="divider"></div>
+            
+							<h5 class="custom-text">There are no reviews yet.</h5>
+							<div class="divider"></div>
             {% endif %}
          {% endfor %}
-         <a href="{{ url_for('allreviews', show_id=show.id) }}"><button class = "custom-search-btn custom-text margin-top1">View all reviews</button></a>
-         </div>
-     </div>
-     </div>
-     </div>
-  
-   
-  
-    <!-- The show synopsis -->
-    <div class="row row-custom">
-    <div class="col s10 offset-s1 custom-card-plot">
-      <div class="card blue-grey darken-1 hoverable">
-        <div class="card-content white-text">
-          <p class="custom-text">{{ show.plot }}</p>
-        </div>
-      </div>
-    </div>
-   </div>
-    
-</section>
-
-  <section class="section2">
-      <!--add a review button if logged in-->
-      <div class="row">
+         
+							<a href="{{ url_for('allreviews', show_id=show.id) }}">
+								<button class = "custom-search-btn custom-text margin-top1">View all reviews</button>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- The show synopsis -->
+			<div class="row row-custom">
+				<div class="col s10 offset-s1 custom-card-plot">
+					<div class="card blue-grey darken-1 hoverable">
+						<div class="card-content white-text">
+							<p class="custom-text">{{ show.plot }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="section2">
+			<!--add a review button if logged in-->
+			<div class="row">
       {% if session.user %}
             {% if not already_reviewed %}
-                <div class="margin-custom-review custom-padding2 center custom-padding3">
-                    <div><h3 class="custom-text">Add a Review</h3></div>
                 
-                <form action = "{{ url_for('addreview', show_id=show.id) }}" method = "POST"> 
-                    <div class="input-field custom-text">
-                    <i class="material-icons prefix">mode_edit</i>
-                    <textarea id="review" class="custom-text custom-textarea" name="review"></textarea>
-                    <label for="review">Review</label>
-                    </div>
-                    <div class="input-field custom-text center">
-                        <button class="btn waves-effect waves-light colour-yellow" type="submit">Submit
-                            <i class="material-icons right">send</i>
-                        </button>
-                    </div>
-                </form>    
-                </div>
+				<div class="margin-custom-review custom-padding2 center custom-padding3">
+					<div>
+						<h3 class="custom-text">Add a Review</h3>
+					</div>
+					<form action = "{{ url_for('addreview', show_id=show.id) }}" method = "POST">
+						<div class="input-field custom-text">
+							<i class="material-icons prefix">mode_edit</i>
+							<textarea id="review" class="custom-text custom-textarea" name="review"></textarea>
+							<label for="review">Review</label>
+						</div>
+						<div class="input-field custom-text center">
+							<button class="btn waves-effect waves-light colour-yellow" type="submit">Submit
+                            
+								<i class="material-icons right">send</i>
+							</button>
+						</div>
+					</form>
+				</div>
             {% else %}
-            <div class="margin-custom-review custom-padding2 custom-padding3 center">
-                 <div><h4 class="custom-text">You have reviewed this show. Go to your <a href="{{ url_for('profile', username=session['user']) }}">profile</a> to see your reviews.</h4></div>
-            </div>
+            
+				<div class="margin-custom-review custom-padding2 custom-padding3 center">
+					<div>
+						<h4 class="custom-text">You have reviewed this show. Go to your 
+							<a href="{{ url_for('profile', username=session['user']) }}">profile</a> to see your reviews.
+						</h4>
+					</div>
+				</div>
             {% endif %}
         {% endif %}
-        </div>
-     
-    
-      <div class="row">
-          <div class="col s12">
-        <h4 class="custom-text">If you like this, try:</h4>
-        </div>
-    </div>
-        <div class="row">
-        <div class="col s12">
+        
+			</div>
+			<div class="row">
+				<div class="col s12">
+					<h4 class="custom-text">If you like this, try:</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12">
         {% for similar in show.similars %}
-        <a href="{{ url_for('tvshow', show_id=similar['id']) }}"><img src="{{ similar.image }}" class="similar-image"></a>
+        
+					<a href="{{ url_for('tvshow', show_id=similar['id']) }}">
+						<img src="{{ similar.image }}" class="similar-image">
+						</a>
       {% endfor %}
-       </div>
-      </div>
-    </section>
+       
+					</div>
+				</div>
+			</section>
       
 {% endblock %}

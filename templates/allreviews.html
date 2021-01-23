@@ -1,23 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <section class="section1b">
-<div class="row">
- <div class="center col s10 offset-s1">
-        <div class="card hoverable custom-card-review center custom-padding4">
-          <span class="card-title custom-text"><h3>Reviews:</h3></span>
+	<div class="row">
+		<div class="center col s10 offset-s1">
+			<div class="card hoverable custom-card-review center custom-padding4">
+				<span class="card-title custom-text">
+					<h3>Reviews:</h3>
+				</span>
           {% for x in reviews %}
           {% if x.review %}
-            <h5 class="review-text margin-top1">{{ x.review }}</h5><br>
-            <h6 class="custom-text">by: {{ x.review_by }}</h6>
-            <div class="divider"></div>
+            
+				<h5 class="review-text margin-top1">{{ x.review }}</h5>
+				<br>
+					<h6 class="custom-text">by: {{ x.review_by }}</h6>
+					<div class="divider"></div>
             {% else %}
-            <h5 class="custom-text">There are no reviews yet.</h5>
-            <div class="divider"></div>
+            
+					<h5 class="custom-text">There are no reviews yet.</h5>
+					<div class="divider"></div>
             {% endif %}
          {% endfor %}
-         </div>
-     </div>
-</div>
-</section>
+         
+				</div>
+			</div>
+		</div>
+	</section>
 {% endblock %}

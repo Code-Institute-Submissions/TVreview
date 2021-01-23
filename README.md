@@ -103,6 +103,8 @@ the next function.
 I created a session variable for the tv show id.
 - Having moved elements around on tvshow.html, there appeared a white space between the sections. Using overflow: none fixed it.
 ### Manuel Testing
+#### Flow of website
+![Website Flow](/static/media/flow.jpeg)
 #### Nav Links
 - Home nav links go to the correct places.
 - Login and Sign up nav links working and buttons between the two.
