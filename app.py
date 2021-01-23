@@ -31,7 +31,8 @@ def index():
 @app.route("/search/<searchterm>")
 def search(searchterm):
     response = requests.get('https://imdb-api.com/API/SearchSeries/',
-    {"apikey": os.environ.get("APIKEY"), "expression": searchterm})
+                            {"apikey": os.environ.get("APIKEY"),
+                             "expression": searchterm})
     searchresults = response.json()
     return render_template('search.html', searchresults=searchresults)
 
@@ -86,13 +87,13 @@ def login():
             {"username": request.form.get("username").lower()})
         # check password matches correctly
         if existing_user:
-            if check_password_hash(
-                existing_user["password"], request.form.get("password")):
-                    session["user"] = request.form.get("username").lower()
-                    global login_user
-                    login_user = True
-                    return redirect(url_for(
-                        'loggedin'))
+            if check_password_hash(existing_user["password"],
+                                   request.form.get("password")):
+                session["user"] = request.form.get("username").lower()
+                global login_user
+                login_user = True
+                return redirect(url_for(
+                    'loggedin'))
             else:
                 # invalid password
                 flash("incorrect username and/ or password")
@@ -129,13 +130,14 @@ def profile(username):
     reviews = mongo.db.reviews.find({"review_by": session["user"]})
     if session["user"]:
         return render_template("profile.html",
-        username=username, favourites=favourites, reviews=reviews)
+                               username=username, favourites=favourites,
+                               reviews=reviews)
 
     return redirect(url_for('login'))
 
 
-@app.route("/edit_reviews/<username>/<title>/<show_id>/<review>", 
-methods=["GET", "POST"])
+@app.route("/edit_reviews/<username>/<title>/<show_id>/<review>",
+           methods=["GET", "POST"])
 def edit_reviews(username, title, show_id, review):
     title = title
     show_id = show_id
@@ -152,12 +154,13 @@ def edit_reviews(username, title, show_id, review):
         mongo.db.reviews.update_one(old_review, edited_review)
         flash("Successfully Edited")
         return redirect(url_for('profile', username=session["user"]))
-    return render_template("edit.html", 
-    title=title, show_id=show_id, username=username, review=review)
+    return render_template("edit.html",
+                           title=title, show_id=show_id,
+                           username=username, review=review)
 
 
-@app.route("/delete_review/<username>/<title>/<show_id>", 
-methods=["GET", "POST"])
+@app.route("/delete_review/<username>/<title>/<show_id>",
+           methods=["GET", "POST"])
 def delete_review(username, title, show_id):
     title = title
     show_id = show_id
@@ -168,14 +171,15 @@ def delete_review(username, title, show_id):
         "review_by": session["user"]
     })
     mongo.db.reviews.delete_one(delete_your_review)
-    return redirect(url_for('profile', 
-    username=session["user"], title=title, show_id=show_id,))
+    return redirect(url_for('profile',
+                    username=session["user"], title=title, show_id=show_id,))
 
 
 @app.route("/tvshow/<show_id>")
 def tvshow(show_id):
     tvresponse = requests.get('https://imdb-api.com/en/API/Title/',
-    {"apikey": os.environ.get("APIKEY"), "id": show_id, "options": "Trailer"})
+                              {"apikey": os.environ.get("APIKEY"),
+                               "id": show_id, "options": "Trailer"})
     show = tvresponse.json()
     session["global_show_id"] = show.get("id")
     session["title"] = show.get("title")
@@ -209,13 +213,16 @@ def tvshow(show_id):
         already_reviewed = mongo.db.reviews.find_one(
             {"review_by": session["user"], "review_for": show_id})
         return render_template("tvshow.html",
-        show=show, reviews=reviews, rating_count=rating_count,
-        score=score, favourite=favourite, existing_rating=existing_rating,
-        already_reviewed=already_reviewed)
+                               show=show, reviews=reviews,
+                               rating_count=rating_count,
+                               score=score, favourite=favourite,
+                               existing_rating=existing_rating,
+                               already_reviewed=already_reviewed)
     else:
         return render_template("tvshow.html",
-        show=show, reviews=reviews, rating_count=rating_count,
-        score=score, favourite=favourite)
+                               show=show, reviews=reviews,
+                               rating_count=rating_count,
+                               score=score, favourite=favourite)
 
 
 @app.route('/addreview/<show_id>', methods=['GET', 'POST'])
@@ -287,7 +294,8 @@ def allreviews(show_id):
     reviews = review_coll.find(review_query)
     return render_template('allreviews.html', reviews=reviews)
 
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)
+            debug=False)

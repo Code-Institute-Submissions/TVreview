@@ -117,6 +117,8 @@ I created a session variable for the tv show id.
 - Link to profile from logged in page works.
 - 
 
+### Validators
+- [PEP8 Online Check](http://pep8online.com/) used. Adjusted some under indented continuation lines and removed whitespace.
 ## Deployment
 
 ## Credits

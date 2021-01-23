@@ -2,7 +2,7 @@
 
 .custom-text {
     font-family: 'Xanh Mono', monospace;
-    color: #e5e5e5;
+    color: #c5c5c5;
     margin-top: 0px;
     margin-bottom: 0px;
 }
@@ -33,7 +33,7 @@
 }
 
 .colour-yellow {
-    background-color: #fca311;
+    background-color: #fca211;
 }
 
 .colour-red {
@@ -138,7 +138,9 @@
     border: 1px solid #e5e5e5;
     padding: 5px;
 }
+
 /*-----------cards-------------------*/
+
 .card-background {
     background-color: #000000;
 }
@@ -154,6 +156,8 @@
     background-color: #3a3a3a;
     margin: 10% auto;
     width: 80%;
+    max-height: 420px;
+    overflow: auto;
 }
 
 .custom-card-plot {
