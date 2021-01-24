@@ -1,19 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="section1">
-<div class="center">
+<section class="section1b">
+<div class=" row center custom-padding5">
+    <div class="col s12">
 <p class="custom-text"> Thank you for your submission</p>
 </div>
-<div class="row">
+</div>
+<div class="row center">
     <div class="col s6">
         {% if session.global_show_id %}
-        <p class="custom-text">Go back to previously viewed tvshow</p>
-        <a href="{{ url_for('tvshow', show_id=session['global_show_id']) }}"><button>Previous tv show</button></a>
+        <p class="custom-text">Go back to</p>
+        <a href="{{ url_for('tvshow', show_id=session['global_show_id']) }}"><button class="my-btns custom-text margin-top1 btn-small">Previous tv show</button></a>
         {% endif %}
     </div>
     <div class="col s6">
-        <a href="{{ url_for ('profile', username=session['user']) }}"><button>Profile</button></a>
+        <p class="custom-text">Go to</p>
+        <a href="{{ url_for ('profile', username=session['user']) }}"><button class="my-btns custom-text margin-top1 btn-small">Profile</button></a>
     </div>
 </div>
 </section>
