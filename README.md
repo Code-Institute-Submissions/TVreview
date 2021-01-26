@@ -118,6 +118,7 @@ I created a session variable for the tv show id.
 
 #### Search
 - Input field initially allowed other characters, now changed.
+- Needed to add allow for spaces.
 - Needs to be an input.
 - If nothing found, just displays search again button.
 
