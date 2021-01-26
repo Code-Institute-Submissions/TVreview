@@ -137,6 +137,7 @@
     border-radius: 2px;
     width: 50%;
     height: 30px;
+    padding: 0px;
 }
 
 .text-border {
@@ -170,7 +171,8 @@
 }
 /*-----------reviews---------------*/
 .custom-star {
-    color: rgb(161, 161, 4); 
+    color: rgb(161, 161, 4);
+    font-size: 4rem; 
 }
 
 .custom-fav {
@@ -188,10 +190,11 @@
 }
 
 .star-btn-background {
-     border: 0;
+    border: 0;
     background: none;
     box-shadow: none;
-    border-radius: 0px;   
+    border-radius: 0px;  
+    padding: 0px; 
 }
 
 .custom-textarea {
@@ -227,3 +230,26 @@
     width: 50%;
 }
 }
+
+@media screen and (min-width: 601px) {
+    .custom-star {
+    color: rgb(161, 161, 4);
+    font-size: 2rem; 
+}
+}
+
+@media screen and (min-width: 609px) {
+    .custom-star {
+    color: rgb(161, 161, 4);
+    font-size: 3rem; 
+}
+}
+
+
+@media screen and (min-width: 775px) {
+    .custom-star {
+    color: rgb(161, 161, 4);
+    font-size: 4rem; 
+}
+}
+

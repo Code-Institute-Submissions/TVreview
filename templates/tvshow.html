@@ -38,7 +38,7 @@
 				<div class="center custom-padding2">
         {% for n in range(score) %}
         
-					<i class="medium custom-star material-icons">star</i>
+					<i class="custom-star material-icons">star</i>
         {% endfor %}
         
 					<p class="custom-text">({{ rating_count }} rating(s))</p>
@@ -51,27 +51,27 @@
 					<h4 class="custom-text">Rate this show</h4>
 					<form action = "{{ url_for('rating', show_id=show.id, rating_no=1) }}" method = "POST" class="inline">
 						<button type="submit" value="submit" class="star-btn-background">
-							<i class="medium custom-star material-icons star-rating" id = "star-rating1" onmouseover="starChange1()" onmouseout="star1()">star_border</i>
+							<i class="custom-star material-icons star-rating" id = "star-rating1" onmouseover="starChange1()" onmouseout="star1()">star_border</i>
 						</button>
 					</form>
 					<form action = "{{ url_for('rating', show_id=show.id, rating_no=2)  }}" method = "POST" class="inline">
 						<button type="submit" value="submit" class="star-btn-background">
-							<i class="medium custom-star material-icons star-rating" id = "star-rating2" onmouseover="starChange2()" onmouseout="star2()">star_border</i>
+							<i class="custom-star material-icons star-rating" id = "star-rating2" onmouseover="starChange2()" onmouseout="star2()">star_border</i>
 						</button>
 					</form>
 					<form action = "{{ url_for('rating', show_id=show.id, rating_no=3)  }}" method = "POST" class="inline">
 						<button type="submit" value="submit" class="star-btn-background">
-							<i class="medium custom-star material-icons star-rating" id = "star-rating3" onmouseover="starChange3()" onmouseout="star3()">star_border</i>
+							<i class="custom-star material-icons star-rating" id = "star-rating3" onmouseover="starChange3()" onmouseout="star3()">star_border</i>
 						</button>
 					</form>
 					<form action = "{{ url_for('rating', show_id=show.id, rating_no=4)  }}" method = "POST" class="inline">
 						<button type="submit" value="submit" class="star-btn-background">
-							<i class="medium custom-star material-icons star-rating" id = "star-rating4" onmouseover="starChange4()" onmouseout="star4()">star_border</i>
+							<i class="custom-star material-icons star-rating" id = "star-rating4" onmouseover="starChange4()" onmouseout="star4()">star_border</i>
 						</button>
 					</form>
 					<form action = "{{ url_for('rating', show_id=show.id, rating_no=5)  }}" method = "POST" class="inline">
 						<button type="submit" value="submit" class="star-btn-background">
-							<i class="medium custom-star material-icons star-rating" id = "star-rating5" onmouseover="starChange5()" onmouseout="star5()">star_border</i>
+							<i class="custom-star material-icons star-rating" id = "star-rating5" onmouseover="starChange5()" onmouseout="star5()">star_border</i>
 						</button>
 					</form>
 				</div>

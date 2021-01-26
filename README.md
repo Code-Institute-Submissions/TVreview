@@ -1,5 +1,7 @@
 # What 2 Watch
 
+![Website view](/static/media/responsive.png)
+
 ## Introduction
 What 2 Watch is a website that tells you what next series you should watch on Netflix, Amazon
 Prime etc. It is unique in having only tv series so attracts the ‘binge watchers’ as oppose to the ‘film
@@ -104,6 +106,7 @@ the next function.
 - It would have been frustrating for the user to login on the tvshow.html and then have to press the back button to get back. In order to get back to the tv show they last looked at,
 I created a session variable for the tv show id.
 - Having moved elements around on tvshow.html, there appeared a white space between the sections. Using overflow: none fixed it.
+- Stars responsiveness was not correct. Stars kept going out of line on screen size slightly larger than mobile. Used media queries to fix the small size window where this happened.
 ### Manuel Testing
 #### Flow of website
 ![Website Flow](/static/media/flow.jpeg)

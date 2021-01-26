@@ -30,11 +30,14 @@ def index():
 
 @app.route("/search/<searchterm>")
 def search(searchterm):
-    response = requests.get('https://imdb-api.com/API/SearchSeries/',
-                            {"apikey": os.environ.get("APIKEY"),
-                             "expression": searchterm})
-    searchresults = response.json()
-    return render_template('search.html', searchresults=searchresults)
+    try:
+        response = requests.get('https://imdb-api.com/API/SearchSeries/',
+                                {"apikey": os.environ.get("APIKEY"),
+                                "expression": searchterm})
+        searchresults = response.json()
+        return render_template('search.html', searchresults=searchresults)
+    except Exception:
+        return render_template('error.html')
 
 
 @app.route("/searchredirect", methods=["GET", "POST"])
