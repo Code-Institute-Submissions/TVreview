@@ -33,6 +33,8 @@ As a user:
 - I want to see my history of reviews and favourites
 - To be given suggested shows based on my likes
 
+### Data 
+![Database Structure](/static/media/db.png)
 ### Design
 #### Fonts
 The text is a little archaic in style to signify going back to basics- a recommendation from
@@ -109,9 +111,15 @@ I created a session variable for the tv show id.
 - Home nav links go to the correct places.
 - Login and Sign up nav links working and buttons between the two.
 #### Login and Sign up
-- Password validator works.
-- Check if username/ email exists works.
+- Password validator/ pattern works.
+- Input fields for username only allows text and numbers, email has to have @.
+- The check to see if username/ email exists works.
 - Sign Up, logout, login works.
+
+#### Search
+- Input field initially allowed other characters, now changed.
+- Needs to be an input.
+- If nothing found, just displays search again button.
 
 #### Profile
 - Link to profile from logged in page works.

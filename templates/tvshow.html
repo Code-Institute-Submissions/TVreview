@@ -114,10 +114,12 @@
          {% endfor %}
 						</div>
                     </div>
+                        <div class="center">
+                            <a href="{{ url_for('allreviews', show_id=show.id) }}">
+                                <button class = "custom-search-btn custom-text margin-top1">View all reviews</button>
+                            </a>
+                        </div>  
                 </div>
-                    <a href="{{ url_for('allreviews', show_id=show.id) }}">
-						<button class = "custom-search-btn custom-text margin-top1">View all reviews</button>
-					</a>
 			</div>
 			<!-- The show synopsis -->
 			<div class="row row-custom">

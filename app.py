@@ -128,10 +128,11 @@ def profile(username):
         {"username": session["user"]})["username"]
     favourites = mongo.db.favourites.find({"user": session["user"]})
     reviews = mongo.db.reviews.find({"review_by": session["user"]})
-    if session["user"]:
+    # Session user must be same as username inputted into function 
+    if session["user"] == username:
         return render_template("profile.html",
                                username=username, favourites=favourites,
-                               reviews=reviews, pag=pag)
+                               reviews=reviews)
     return redirect(url_for('login'))
 
 

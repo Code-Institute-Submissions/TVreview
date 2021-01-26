@@ -3,7 +3,7 @@
 {% block content %}
 <section class="section1">
 <div class="row custom-padding2 row-custom">
-    <h3 class="custom-text center col s12">Edit {{ username }}'s Reviews</h3>
+    <h3 class="custom-text center col s12">{{ username }}'s Profile</h3>
 </div>
 <div class="row">
     <div class="col s12 m3 custom-padding2 center">
@@ -22,11 +22,13 @@
     </div>
     
 </div>
-<div class="row custom-padding2">
+</section>
+<section class="section2">
+<div class="row custom-padding2 center">
     <div class="col s12"><h4 class="custom-text">Your Favourite TV Shows</h4>
     </div>
 </div>
-<div class="row custom-padding2 custom-padding5 row-custom">
+<div class="row custom-padding2 custom-padding5 row-custom center">
     <div class="col s12">
     <h5 class="custom-text capital-letter">
         {% for favourite in favourites %}
@@ -36,18 +38,18 @@
     </div>
 </div>
 </section>
-<section class="section2">
-<div class="row custom-padding2">
+<section class="section3">
+<div class="row custom-padding2 center">
     <div class="col s12"><h4 class="custom-text">Your Reviews</h4>
     </div>
 </div>
 <div class="row custom-padding2">
-    <div class="col s6">
+    <div class="col s6 offset-s3">
         
         {% for review in reviews %}
         <div class="text-border">
-            <h5 class="custom-text capital-letter">{{ review.title }}:</h5><br>
-            <p class="custom-text">{{ review.review }}</p>
+            <h5 class="custom-text capital-letter">{{ review.title }}:</h5>
+            <p class="review-text">{{ review.review }}</p>
             <a href="{{ url_for('edit_reviews', username=username, title=review.title, show_id=review.review_for, review=review.review) }}"><button>Edit</button></a>
             <a href="{{ url_for('delete_review', username=username, title=review.title, show_id=review.review_for) }}"><button>Delete</button></a>
         </div>
