@@ -26,14 +26,16 @@
 			</div>
 			<div class="col s12 m5 container">
 				<!-- right column -->
-				<!-- Favourite the show -->
+                <!-- Favourite the show -->
+                {% if session.user %}
 				<div class="center custom-padding2">
 					<form action = "{{ url_for('favourite', username=session['user'], show_id=show.id) }}" method = "POST">
 						<button type="submit" value="submit" class="star-btn-background">
 							<i class="material-icons medium custom-fav" id="favorite">{{ favourite }}</i>
 						</button>
 					</form>
-				</div>
+                </div>
+                {% endif %}
 				<!-- star ratings-->
 				<div class="center custom-padding2">
         {% for n in range(score) %}

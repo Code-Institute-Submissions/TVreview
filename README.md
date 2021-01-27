@@ -40,7 +40,8 @@ As a user:
 ### Design
 #### Fonts
 The text is a little archaic in style to signify going back to basics- a recommendation from
-a friend as oppose to modern data laden websites.
+a friend as oppose to modern data laden websites. The main text is Xanh Mono. The review text is Caveat. This looks more like handwriting
+as if the user has hand written it.
 #### Colours
 A lot of the popular tv series have mystery and twists involved. The design is dark to signify
 mystery. The alert font was initially red but changed to green as the alert does not always mean something bad. Some colour added to the buttons, e.g. the login button to make them stand out more.
@@ -48,7 +49,7 @@ mystery. The alert font was initially red but changed to green as the alert does
 I used icons from materialize. These icons are recognisable by the user and they can work out what the function is.
 #### Styling
 I used Materilize to help to organise my layout. What 2 Watch is the title of the website and is shortened to W2W for the logo. 
-The buttons have slightly rounded edges to look more appealing. 
+The buttons have slightly rounded edges to look more appealing. Colours change on the buttons as the user hovers over. Also, the cards pop out as the user hovers over them.
 
 ### Wireframes
 I created the wireframes on [Balsamiq](https://balsamiq.com/). There were changes to the shortened title (from WtW to W2W). Also, I removed the add tv show and 
@@ -78,7 +79,7 @@ decided to import from an API:
 - Suggested tv shows similar to the one they are looking at 
 
 ### Future Features
-- Suggested titles come up as user is searching
+- As the user types in Suggested titles come up as user is searching
 - User can search genres, actors etc.
 - User can see a trailer for the tv show
 - User is given options of where to view the show
@@ -106,13 +107,14 @@ the next function.
 - It would have been frustrating for the user to login on the tvshow.html and then have to press the back button to get back. In order to get back to the tv show they last looked at,
 I created a session variable for the tv show id.
 - Having moved elements around on tvshow.html, there appeared a white space between the sections. Using overflow: none fixed it.
-- Stars responsiveness was not correct. Stars kept going out of line on screen size slightly larger than mobile. Used media queries to fix the small size window where this happened.
+- Stars responsiveness was not correct. Stars kept going out of line on ipad screen size. Used media queries to fix the small size window where this happened.
 ### Manuel Testing
 #### Flow of website
 ![Website Flow](/static/media/flow.jpeg)
 #### Nav Links
 - Home nav links go to the correct places.
 - Login and Sign up nav links working and buttons between the two.
+
 #### Login and Sign up
 - Password validator/ pattern works.
 - Input fields for username only allows text and numbers, email has to have @.
@@ -127,7 +129,24 @@ I created a session variable for the tv show id.
 
 #### Profile
 - Link to profile from logged in page works.
-- 
+- Buttons that link to previous tv show and new search work.
+- Favourite tv shows and reviews shown.
+- Links to favourite tv shows work.
+- Edit review works.
+- Fixed issue where cancel button still sent form. Changed button to type button as it was defaulting as submit.
+- Delete button works.
+- After searching for another tv show, link to previous tv show sends you to correct show.
+
+#### Tv Show
+- Favourites heart button works. Clicking it again brings up flash message that it is already a favourite.
+- Login button works.
+- Changes to layout and what the user can see when logged in- needed to alter favourites heart icon only appear when user logged in.
+- Reviews are shown. If no reviews, it just has the title.
+- Show all reviews link button works and link back.
+- Link to profile works when logged in.
+- Star rating works when user rates the show. Stars are shown correctly as well as correct number of ratings.
+- Adding a review works.
+- Links to simoiar tv shows work.
 
 ### Validators
 - [PEP8 Online Check](http://pep8online.com/) used. Adjusted some under indented continuation lines and removed whitespace.
