@@ -3,52 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var instances = M.Sidenav.init(elems, {});
   });
 
-/*-------------IMDB API------------------*/  
-/*----search------*/
-const baseURL = "https://imdb-api.com/API/SearchSeries/APIKEY/"
-
-  
-function getData(search, cb) {
-    var xhr = new XMLHttpRequest();
-
-    xhr.open("GET", baseURL + search);
-    xhr.send();
-
-    xhr.onreadystatechange = function() {
-
-        if (this.readyState == 4 && this.status == 200) {
-        
-            cb(data = JSON.parse(this.responseText));
-        
-        }
-    };
-}
-
-var test = [];
-
-function writeToDocument(search) {
-    getData(search, function (data){
-        /*clear results*/
-        var clear = document.getElementById('data');
-        clear.innerHTML = "";
-        data = data.results;
-        data.forEach(function(searchResult) {
-        document.getElementById('data').innerHTML += "<p>" + searchResult.title + "</p>";
-        test += searchResult.title
-        sessionStorage.setItem("title", test);
-        });
-        var session = sessionStorage.getItem("title");
-    console.log(session)
-    })
-}
-
-/*------load the correct data---------*/
-
-function b() {
-    document.getElementById('test').innerHTML += "<p>" + test + "</p>";
-    console.log(test)
-}
-
 /*---------star rating----------*/
 
 function starChange1() {

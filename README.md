@@ -150,6 +150,13 @@ I created a session variable for the tv show id.
 
 ### Validators
 - [PEP8 Online Check](http://pep8online.com/) used. Adjusted some under indented continuation lines and removed whitespace.
+- [HTML Validator](https://validator.w3.org/) used. Moved 'hr' and 'br' outside of 'a' tag on search.html. Added alt on tvshow.html.
+- [CSS Validator](https://jigsaw.w3.org/css-validator/) used. No errors reported.
+- [Javascript Validator](https://jshint.com/) used. No major issues.
+
+### Know issues
+- On free plan, only 100 API calls allowed.
+
 ## Deployment
 
 ## Credits

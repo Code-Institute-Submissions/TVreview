@@ -11,7 +11,7 @@
 		<div class="col s12 m6">
 			<div class="card hoverable custom-card-image">
 				<div class="card-image">
-					<img src="{{ show.image }}">
+					<img src="{{ show.image }}" alt="TV show image">
 					</div>
 					<div class="card-content">
 						<h5 class="custom-text">{{ show.fullTitle }}</h5>
@@ -181,7 +181,7 @@
         {% for similar in show.similars %}
         
 					<a href="{{ url_for('tvshow', show_id=similar['id']) }}">
-						<img src="{{ similar.image }}" class="similar-image">
+						<img src="{{ similar.image }}" class="similar-image" alt="Image for similar or suggested tv show">
 						</a>
       {% endfor %}
        

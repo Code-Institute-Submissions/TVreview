@@ -2,26 +2,32 @@
 
 {% block content %}
 <section class="section1b">
-    <div class="row custom-padding2">
-        <div class="col s12 center ">
-            <h3 class="custom-text">Results:</h3>
-        </div>
-    </div>
-    <div class="row custom-padding2">
-<div class="col s12 m6 custom-padding offset-m3 center">
+	<div class="row custom-padding2">
+		<div class="col s12 center ">
+			<h3 class="custom-text">Results:</h3>
+		</div>
+	</div>
+	<div class="row custom-padding2">
+		<div class="col s12 m6 custom-padding offset-m3 center">
 {% for searchresult in searchresults.results %}
     {% if searchresult['title'] %}
-        <h5><a href="{{ url_for('tvshow', show_id=searchresult['id']) }}" class="custom-text">{{ searchresult['title'] }}<br><hr></a></h5>
+			<h5>
+				<a href="{{ url_for('tvshow', show_id=searchresult['id']) }}" class="custom-text">{{ searchresult['title'] }}</a>
+					<br>
+					<hr>	
+			</h5>
     {% else %}
-        <h5 class="custom-test">Sorry, there are no results.</h5>
+					<h5 class="custom-test">Sorry, there are no results.</h5>
     {% endif %}    
 {% endfor %}
-</div>
-</div>
-<div class="row">
-    <div class="col s10 offset-s1 center">
-        <a href="{{ url_for('index') }}"><button class="custom-search-btn custom-text">Search again</button></a>
-    </div>
-</div>
-</section>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s10 offset-s1 center">
+					<a href="{{ url_for('index') }}">
+						<button class="custom-search-btn custom-text">Search again</button>
+					</a>
+				</div>
+			</div>
+		</section>
 {% endblock %}

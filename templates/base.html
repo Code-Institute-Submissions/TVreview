@@ -1,66 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What 2 Watch</title>
-    <!--materialize-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!--google fonts-->
-    <link href="https://fonts.googleapis.com/css2?family=Xanh+Mono&display=swap" rel="stylesheet">
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src= "{{ url_for('static', filename='js/script.js') }}" type="text/javascript"></script>
-</head>
-<body>
-    <nav class="custom-nav">
-        <div class="nav-wrapper">
-        <a href="{{ url_for ('index') }}" class="brand-logo custom-logo">W2W</a>
-        <a href="#" data-target="mobile-demo" data-activates="slide-out" class="sidenav-trigger custom-text"><i class="material-icons">menu</i></a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="{{ url_for ('index') }}">Home</a></li>
+	<head>
+		<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<title>What 2 Watch</title>
+				<!--materialize-->
+				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+					<!--google fonts-->
+					<link href="https://fonts.googleapis.com/css2?family=Xanh+Mono&display=swap" rel="stylesheet">
+						<!--Import Google Icon Font-->
+						<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+							<link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+								<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+									<script src= "{{ url_for('static', filename='js/script.js') }}" type="text/javascript"></script>
+								</head>
+								<body>
+									<nav class="custom-nav">
+										<div class="nav-wrapper">
+											<a href="{{ url_for ('index') }}" class="brand-logo custom-logo">W2W</a>
+											<a href="#" data-target="mobile-demo" data-activates="slide-out" class="sidenav-trigger custom-text">
+												<i class="material-icons">menu</i>
+											</a>
+											<ul id="nav-mobile" class="right hide-on-med-and-down">
+												<li>
+													<a href="{{ url_for ('index') }}">Home</a>
+												</li>
             {% if session.user %}
-            <li><a href="{{ url_for ('profile', username=session['user']) }}">Profile</a></li>
-            <li><a href="{{ url_for ('logout') }}">Logout</a></li>
+												<li>
+													<a href="{{ url_for ('profile', username=session['user']) }}">Profile</a>
+												</li>
+												<li>
+													<a href="{{ url_for ('logout') }}">Logout</a>
+												</li>
             {% else %}
-            <li><a href="{{ url_for ('signUp') }}">SignUp</a></li> 
-            <li><a href="{{ url_for ('login') }}">Login</a></li>
+												<li>
+													<a href="{{ url_for ('signUp') }}">SignUp</a>
+												</li>
+												<li>
+													<a href="{{ url_for ('login') }}">Login</a>
+												</li>
             {% endif %}
-        </ul>
-        </div>
-    </nav>
-    <ul class="sidenav" id="mobile-demo">
-            <li><a href="{{ url_for ('index') }}">Home</a></li>
+											</ul>
+										</div>
+									</nav>
+									<ul class="sidenav" id="mobile-demo">
+										<li>
+											<a href="{{ url_for ('index') }}">Home</a>
+										</li>
             {% if session.user %}
-            <li><a href="{{ url_for ('profile', username=session['user']) }}">Profile</a></li>
-            <li><a href="{{ url_for ('logout') }}">Logout</a></li>
+										<li>
+											<a href="{{ url_for ('profile', username=session['user']) }}">Profile</a>
+										</li>
+										<li>
+											<a href="{{ url_for ('logout') }}">Logout</a>
+										</li>
             {% else %}
-            <li><a href="{{ url_for ('signUp') }}">SignUp</a></li> 
-            <li><a href="{{ url_for ('login') }}">Login</a></li>
+										<li>
+											<a href="{{ url_for ('signUp') }}">SignUp</a>
+										</li>
+										<li>
+											<a href="{{ url_for ('login') }}">Login</a>
+										</li>
             {% endif %}
-  </ul>
-
-    <section class="section1">
-    <header class="title">What 2 Watch</header>
-    <!--flash messages-->
+									</ul>
+									<section class="section1">
+										<header class="title">What 2 Watch</header>
+										<!--flash messages-->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
-                <div class="row"><div class="center col s8 m6 offset-s2 offset-m3"><p class="alert-text">{{ message }}</p></div></div>
+										<div class="row">
+											<div class="center col s8 m6 offset-s2 offset-m3">
+												<p class="alert-text">{{ message }}</p>
+											</div>
+										</div>
                 {% endfor %}
             {% endif %}
         {% endwith %}
-    </section>
+									</section>
     {% block content %}
     
-   
-     
     {% endblock %}
-
-     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
-    
-</html>
+									<!-- Compiled and minified JavaScript -->
+									<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+								</body>
+							</html>
