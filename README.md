@@ -29,7 +29,7 @@ As a user:
 - I want to see the reviews of the tv show
 - I want to write my own review of a tv show
 - I want to rate how good a tv show is
-- to see the average rating for a tv show
+- I want to see the average rating for a tv show
 - I want to sign in
 - I want to book mark a show by making it a favourite
 - I want to see my history of reviews and favourites
@@ -64,27 +64,40 @@ decided to import from an API:
 ## Features
 
 ### Existing Features
-- Navbar with links to home page, sign up and login. Changes when logged in so that log out and profile are available
-- Search bar for searching tv shows titles from IMDB API
+- Navbar with links to home page, sign up and login. Changes when logged in so that log out and profile are available  
+_As a user I want to search for a tv show:_
+- Search bar for searching tv shows titles from IMDB API  
+_As a user I want to sign in:_  
 - Ability to sign up and login with user authentication and password validation
 - Password stored securely using Werkzeug
-- Message flashes to ensure the user knows what is happening
-- User, when logged in, can rate and review a tv show
+- Message flashes to ensure the user knows what is happening  
+_As a user I want to write my own review of a tv show:_  
+_As a user I want to rate how good a tv show is:_  
+- User, when logged in, can rate and review a tv show  
+_As a user I want to book mark a show by making it a favourite:_  
+- User, when logged in, can favourite a tv show  
+_As a user I want to see my history of reviews and favourites:_  
 - User profile with their favourite tv shows and their reviews
 - ability for user to edit and delete their reviews
 - protection against a user rating or reviewing multiple times
-- User can navigate back to previously viewed tv show
+- User can navigate back to previously viewed tv show  
+_As a user I want to see the reviews of the tv show:_  
+_As a user I want to see the average rating for a tv show:_  
 - User can see the reviews and average star rating for each show
-- User can see information pulled from IMDB API about the tv show
+- User can see information pulled from IMDB API about the tv show  
+_As a user To be given suggested shows based on my likes:_  
 - Suggested tv shows similar to the one they are looking at 
 
 ### Future Features
-- As the user types in Suggested titles come up as user is searching
-- User can search genres, actors etc.
-- User can see a trailer for the tv show
-- User is given options of where to view the show
-- User can view the top rated tv shows on the home page
-- Monetise website through advertising and/ or linking to Netflix, Amazon Prime
+These features could be added to the website with more time and with more expertise:
+- As the user types in the search bar, a list of suggested titles comes up. This means that the user can click on one of the suggestions which shortens the time for the user to get to the tv show.
+- Users would want to be able to search for genres, actors etc. This means if they do not know the title of the movie but do know one of the actors, it will find the appropriate tv shows. 
+Also, users may want to search for a particular genre or tv shows from a particular country rather than a specific show. 
+- On the tv show page, the user may want to see a trailer for the tv show to get a feel for what it is like.
+- If a user likes a tv show and wants to watch it, the website can give a link to Netflix or Amazon Prime etc. so that the user can go straight to watching it rather than having to search for it again
+on a streaming platform. As well as this, as the websites owner, money can be made in this way. Netflix or Amazon Prime would pay for the link to their websites.
+- On the home page, underneath the search bar, the User can view the top rated tv shows. This is another way of suggesting to the user what tv show they may want to watch.
+
 
 ## Technologies Used
 - This project uses HTML5, CSS3, Javascript, Python, Flask and Jinja.
@@ -146,7 +159,7 @@ I created a session variable for the tv show id.
 - Link to profile works when logged in.
 - Star rating works when user rates the show. Stars are shown correctly as well as correct number of ratings.
 - Adding a review works.
-- Links to simoiar tv shows work.
+- Links to simliar tv shows work.
 
 ### Validators
 - [PEP8 Online Check](http://pep8online.com/) used. Adjusted some under indented continuation lines and removed whitespace.
@@ -154,10 +167,45 @@ I created a session variable for the tv show id.
 - [CSS Validator](https://jigsaw.w3.org/css-validator/) used. No errors reported.
 - [Javascript Validator](https://jshint.com/) used. No major issues.
 
+### Website speed
+- Home page speed
+![Home Page Speed](/static/media/ping_index.png)
+- TV show speed
+![TV show page speed](/static/media/ping_tvshow.png) 
+
 ### Know issues
 - On free plan, only 100 API calls allowed.
 
 ## Deployment
+- You will need to use [PIP](https://pypi.org/project/pip/) and ensure it is up to date, Git for version control and [Mongo DB](https://www.mongodb.com/) 
+with a database set up as described earlier.
+#### Create a requirements.txt
+- You need a requirements.txt so that your app knows what libraries to use. In order to do that, in your terminal type:
+```
+pip3 freeze --local > requirements.txt
+```
+#### Add a Procfile
+- To add a Procfile, type into your teminal:
+```
+echo web: python app.py > Procfile
+```
+Make sure that there is not a blank line added at the bottom
+#### Create a Heroku app
+- Log into Heroku or create an account.
+- Create a new app and give it a unique name
+- Select a region to deploy from
+- Connect your github to Heroku by adding in your github repository name
+- In settings, add config variables as below:  
+
+| KEY          | VALUE                   |  
+|--------------|-------------------------|   
+| IP           | 0.0.0.0                 |
+| PORT         | 5000                    |
+| MONGO_URI    | (Your own Mongo URI)    |
+| SECRET_KEY   | (Your own secret key)   |
+| MONGO_DBNAME | (Your own DB name)      |
+- Enable Automatic Deployment from your Github
+- Deploy the correct branch
 
 ## Credits
 ### Content
