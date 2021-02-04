@@ -10,8 +10,8 @@
 		<div class="col s12 m3 custom-padding2 center">
         {% if session.global_show_id %}
         
-			<h5 class="custom-text">
-				<i class="small material-icons custom-padding3">arrow_back</i>Go back to previously viewed tvshow
+			<h5 class="custom-text small-hide">
+				<i class="small material-icons custom-padding3">arrow_back</i>Go back to last viewed tvshow
 			</h5>
 			<div class="center">
 				<a href="{{ url_for('tvshow', show_id=session['global_show_id']) }}">
@@ -22,7 +22,7 @@
     
 		</div>
 		<div class="col s12 m3 offset-m6 custom-padding2 center">
-			<h5 class="custom-text">Search for a TV show
+			<h5 class="custom-text small-hide">Search for a TV show
 				<i class="small material-icons custom-padding3">arrow_forward</i>
 			</h5>
 			<div class="center">

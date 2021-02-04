@@ -169,7 +169,7 @@
 				</div>
             {% endif %}
         {% endif %}
-        
+            <!--Similar tv shows-->
 			</div>
 			<div class="row">
 				<div class="col s12">
@@ -181,7 +181,7 @@
         {% for similar in show.similars %}
         
 					<a href="{{ url_for('tvshow', show_id=similar['id']) }}">
-						<img src="{{ similar.image }}" class="similar-image" alt="Image for similar or suggested tv show">
+						<img src="{{ similar.image }}" class="similar-image" alt="Image for similar or suggested tv show" loading="lazy">
 						</a>
       {% endfor %}
        

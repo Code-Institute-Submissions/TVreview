@@ -18,6 +18,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+# use variable instead of session['user']
 login_user = False
 
 # Home page
@@ -31,9 +32,10 @@ def index():
 @app.route("/search/<searchterm>")
 def search(searchterm):
     try:
+        # Get data from imdb API
         response = requests.get('https://imdb-api.com/API/SearchSeries/',
                                 {"apikey": os.environ.get("APIKEY"),
-                                "expression": searchterm})
+                                 "expression": searchterm})
         searchresults = response.json()
         return render_template('search.html', searchresults=searchresults)
     except Exception:
@@ -64,7 +66,7 @@ def signUp():
             {"username": request.form.get("username").lower()})
         existing_email = mongo.db.users.find_one(
             {"email": request.form.get("email").lower()})
-
+        # check if username or email exists
         if existing_user or existing_email:
             flash("Username/ Email already exists")
             redirect(url_for("signUp"))
@@ -153,6 +155,7 @@ def edit_reviews(username, title, show_id, review):
             "review": request.form.get("edit_review"),
             "review_by": session["user"]
         }}
+        # get old review and update with new review
         old_review = {"review_by": session["user"], "review_for": show_id}
         mongo.db.reviews.update_one(old_review, edited_review)
         flash("Successfully Edited")
@@ -180,10 +183,13 @@ def delete_review(username, title, show_id):
 
 @app.route("/tvshow/<show_id>")
 def tvshow(show_id):
+    # API request from imdb
     tvresponse = requests.get('https://imdb-api.com/en/API/Title/',
                               {"apikey": os.environ.get("APIKEY"),
                                "id": show_id, "options": "Trailer"})
+    # get the json and put in variable
     show = tvresponse.json()
+    # use session variables so other pages can use
     session["global_show_id"] = show.get("id")
     session["title"] = show.get("title")
     # show the reviews

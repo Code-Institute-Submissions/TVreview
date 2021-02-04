@@ -208,6 +208,10 @@
     border-radius: 2px;
 }
 
+.small-hide {
+    display: none;
+}
+
 /*----------bottom of the page----------*/
 
 .similar-image {
@@ -253,3 +257,8 @@
 }
 }
 
+@media screen and (min-width: 910px) {
+.small-hide {
+    display: block;
+}
+}

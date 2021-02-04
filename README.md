@@ -122,10 +122,13 @@ I created a session variable for the tv show id.
 - Having moved elements around on tvshow.html, there appeared a white space between the sections. Using overflow: none fixed it.
 - Stars responsiveness was not correct. Stars kept going out of line on ipad screen size. Used media queries to fix the small size window where this happened.
 ### Manuel Testing
+Site tested on Chrome, Safari and Microsoft Edge browsers. Media queries work on different size devices. Card-image and stars grow as device gets bigger
+and words on buttons on profile appear on larger devices.
 #### Flow of website
 ![Website Flow](/static/media/flow.jpeg)
 #### Nav Links
 - Home nav links go to the correct places.
+- Nav links  on each page
 - Login and Sign up nav links working and buttons between the two.
 
 #### Login and Sign up
@@ -133,12 +136,17 @@ I created a session variable for the tv show id.
 - Input fields for username only allows text and numbers, email has to have @.
 - The check to see if username/ email exists works.
 - Sign Up, logout, login works.
+[Video link of logging in with incorrect username](/static/media/login1.mp4)
+[Video link of logging in successfully](/static/media/login2.mp4)
+[Video link of password validator](/static/media/pass.mp4)
+[Video link of signing up with username that already exists](/static/media/sign-up.mp4)
 
 #### Search
 - Input field initially allowed other characters, now changed.
 - Needed to add allow for spaces.
-- Needs to be an input.
+- If nothing typed it prompts you to type something.
 - If nothing found, just displays search again button.
+[Video link of search bar only allowing letters and numbers](/static/media/search.mp4)
 
 #### Profile
 - Link to profile from logged in page works.
@@ -169,9 +177,12 @@ I created a session variable for the tv show id.
 
 ### Website speed
 - Home page speed
-![Home Page Speed](/static/media/ping_index.png)
+![Home page speed](/static/media/ping_index.png)
+![Home page performance]()
 - TV show speed
 ![TV show page speed](/static/media/ping_tvshow.png) 
+![TV show page Performance]()  
+Speed slow in tvshow.html due to lots of images for similar tv shows at the bottom. Added lazy loading for those so that main content is shown quicker.
 
 ### Know issues
 - On free plan, only 100 API calls allowed.
@@ -209,6 +220,10 @@ Make sure that there is not a blank line added at the bottom
 
 ## Credits
 ### Content
-### Media
+[IMDb API](https://imdb-api.com/) for the data on tv shows.
 ### Code
+[Bearer](https://blog.bearer.sh/making-api-requests-with-python/) blog for helping with API requests with Python.
+[W3Schools](https://www.w3schools.com/) for help when I forgot some simple code.
 ### Acknowledgements
+- Thank you to Felipe Souza Alarcon for his great support as always.
+- Thank you to Stephen Moody from Code Institute for helping me with linking documents together in a database.
