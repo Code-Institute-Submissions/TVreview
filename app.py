@@ -28,6 +28,9 @@ login_user = False
 def index():
     return render_template("index.html")
 
+# search function to get search term and use
+# it for the search function on the API request
+
 
 @app.route("/search/<searchterm>")
 def search(searchterm):
@@ -40,6 +43,9 @@ def search(searchterm):
         return render_template('search.html', searchresults=searchresults)
     except Exception:
         return render_template('error.html')
+
+# A redirect in order to keep the search term
+# and feed it into the search function
 
 
 @app.route("/searchredirect", methods=["GET", "POST"])

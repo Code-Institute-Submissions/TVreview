@@ -97,6 +97,7 @@ Also, users may want to search for a particular genre or tv shows from a particu
 - If a user likes a tv show and wants to watch it, the website can give a link to Netflix or Amazon Prime etc. so that the user can go straight to watching it rather than having to search for it again
 on a streaming platform. As well as this, as the websites owner, money can be made in this way. Netflix or Amazon Prime would pay for the link to their websites.
 - On the home page, underneath the search bar, the User can view the top rated tv shows. This is another way of suggesting to the user what tv show they may want to watch.
+- Users will be able to toggle favourites and delete favourites from their profile page. They may make a mistake and want to rectify or want to trim down their favourites.
 
 
 ## Technologies Used
@@ -136,17 +137,17 @@ and words on buttons on profile appear on larger devices.
 - Input fields for username only allows text and numbers, email has to have @.
 - The check to see if username/ email exists works.
 - Sign Up, logout, login works.
-[Video link of logging in with incorrect username](/static/media/login1.mp4)
-[Video link of logging in successfully](/static/media/login2.mp4)
-[Video link of password validator](/static/media/pass.mp4)
-[Video link of signing up with username that already exists](/static/media/sign-up.mp4)
+![Clip of logging in with incorrect username](/static/media/login1.gif)   
+![Clip of logging in successfully](/static/media/login2.gif)   
+![Clip of password validator](/static/media/pass.gif)    
+![Clip of of signing up with username that already exists](/static/media/sign-up.gif)  
 
 #### Search
 - Input field initially allowed other characters, now changed.
 - Needed to add allow for spaces.
 - If nothing typed it prompts you to type something.
 - If nothing found, just displays search again button.
-[Video link of search bar only allowing letters and numbers](/static/media/search.mp4)
+![Clip of search bar only allowing letters and numbers](/static/media/search.gif)
 
 #### Profile
 - Link to profile from logged in page works.
@@ -169,6 +170,15 @@ and words on buttons on profile appear on larger devices.
 - Adding a review works.
 - Links to simliar tv shows work.
 
+#### Responsiveness
+- Nav sidebar slides out as it should. Links work. Logo in centre at top.
+- Home page- all elements responsive
+- Search page- all elements responsive
+- Sign up and login- form fills screen 
+- Tv show page- elements stacked underneath each other. User scrolls to see them.
+- All reviews- Needed to make card wider on smaller devices. Elements responsive.
+- Profile- took the words out from the buttons to make it look cleaner. Made card wider on smaller devices. Elements responsive.
+
 ### Validators
 - [PEP8 Online Check](http://pep8online.com/) used. Adjusted some under indented continuation lines and removed whitespace.
 - [HTML Validator](https://validator.w3.org/) used. Moved 'hr' and 'br' outside of 'a' tag on search.html. Added alt on tvshow.html.
@@ -178,10 +188,10 @@ and words on buttons on profile appear on larger devices.
 ### Website speed
 - Home page speed
 ![Home page speed](/static/media/ping_index.png)
-![Home page performance]()
+![Home page performance](/static/media/lighthouse.png)
 - TV show speed
 ![TV show page speed](/static/media/ping_tvshow.png) 
-![TV show page Performance]()  
+![TV show page Performance](/static/media/lighthouse_tv.png)  
 Speed slow in tvshow.html due to lots of images for similar tv shows at the bottom. Added lazy loading for those so that main content is shown quicker.
 
 ### Know issues
@@ -227,3 +237,4 @@ Make sure that there is not a blank line added at the bottom
 ### Acknowledgements
 - Thank you to Felipe Souza Alarcon for his great support as always.
 - Thank you to Stephen Moody from Code Institute for helping me with linking documents together in a database.
+- Thank you to Clare Robinson for trying out the website to check for bugs.
