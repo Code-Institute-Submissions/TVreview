@@ -198,6 +198,7 @@ Speed slow in tvshow.html due to lots of images for similar tv shows at the bott
 - On free plan, only 100 API calls allowed.
 
 ## Deployment
+### Deploy on Heroku
 - You will need to use [PIP](https://pypi.org/project/pip/) and ensure it is up to date, Git for version control and [Mongo DB](https://www.mongodb.com/) 
 with a database set up as described earlier.
 #### Create a requirements.txt
@@ -228,12 +229,40 @@ Make sure that there is not a blank line added at the bottom
 - Enable Automatic Deployment from your Github
 - Deploy the correct branch
 
+### Deploy Locally
+#### Clone repository
+1. In your terminal, type:
+```
+git clone https://github.com/mphil17/TVreview.git
+```
+2. Add the requirements for the project:
+```
+pip3 install -r requirements.txt
+```
+3. Create an account and new project with MongoDB. Add in the database as above. (note: rating is an integer with all other fields being strings). Get the Mongo URI.
+4. Sign up to [IMDb API](https://imdb-api.com/) for the API data and get the API key.
+5. Create an env.py file for all of your environment variables:
+```
+import os
+
+os.environ.setdefault("IP", "0.0.0.0")
+os.environ.setdefault("PORT", "5000")
+os.environ.setdefault("SECRET_KEY", "YOUR_SECRET_KEY")
+os.environ.setdefault("MONGO_URI", "YOUR_MONGO_URI")
+os.environ.setdefault("MONGO_DBNAME", "YOUR_MONGO_DBNAME")
+os.environ.setdefault("APIKEY", "YOUR_API_KEY")
+```
+(make sure that env.py is added to .gitignore if you are pushing to a public repository)
+6. Run the app:
+```
+python3 app.py
+```
 ## Credits
 ### Content
 [IMDb API](https://imdb-api.com/) for the data on tv shows.
 ### Code
 [Bearer](https://blog.bearer.sh/making-api-requests-with-python/) blog for helping with API requests with Python.
-[W3Schools](https://www.w3schools.com/) for help when I forgot some simple code.
+[W3Schools](https://www.w3schools.com/) for help whenever I forgot some simple code.
 ### Acknowledgements
 - Thank you to Felipe Souza Alarcon for his great support as always.
 - Thank you to Stephen Moody from Code Institute for helping me with linking documents together in a database.
