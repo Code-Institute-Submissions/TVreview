@@ -5,7 +5,7 @@
 ## Introduction
 What 2 Watch is a website that tells you what next series you should watch on Netflix, Amazon
 Prime etc. It is unique in having only tv series so attracts the ‘binge watchers’ as oppose to the ‘film
-buffs’ to the website.
+buffs’ to the website. Website can be viewed [here.](http://tvreview.herokuapp.com/)
 
 ## UX
 
