@@ -115,6 +115,9 @@ def login():
     return render_template("login.html")
 
 
+# Gateway after logged in
+
+
 @app.route("/loggedin")
 def loggedin():
     return render_template("loggedin.html", username=session["user"])
@@ -168,6 +171,10 @@ def edit_reviews(username, title, show_id, review):
     return render_template("edit.html",
                            title=title, show_id=show_id,
                            username=username, review=review)
+
+
+# Delete a review. 3 parameters added into
+# function to ensure it deletes only the precise review
 
 
 @app.route("/delete_review/<username>/<title>/<show_id>",
@@ -239,6 +246,9 @@ def tvshow(show_id):
                                score=score, favourite=favourite)
 
 
+# Add a review
+
+
 @app.route('/addreview/<show_id>', methods=['GET', 'POST'])
 def addreview(show_id):
     if request.method == "POST":
@@ -299,6 +309,10 @@ def favourite(username, show_id):
                 return redirect(url_for("profile", username=session["user"]))
             except Exception:
                 return redirect(url_for("error"))
+
+
+# Show all the reviews for the tv show as, if there are many,
+# they won't fit onto the main page
 
 
 @app.route('/allreviews/<show_id>')

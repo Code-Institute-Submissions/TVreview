@@ -146,7 +146,7 @@ and words on buttons on profile appear on larger devices.
 - Input field initially allowed other characters, now changed.
 - Needed to add allow for spaces.
 - If nothing typed it prompts you to type something.
-- If nothing found, just displays search again button.
+- If nothing found, it says 'sorry, there are no results'.
 ![Clip of search bar only allowing letters and numbers](/static/media/search.gif)
 
 #### Profile
