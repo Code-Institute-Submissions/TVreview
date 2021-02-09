@@ -252,7 +252,7 @@ os.environ.setdefault("MONGO_URI", "YOUR_MONGO_URI")
 os.environ.setdefault("MONGO_DBNAME", "YOUR_MONGO_DBNAME")
 os.environ.setdefault("APIKEY", "YOUR_API_KEY")
 ```
-(make sure that env.py is added to .gitignore if you are pushing to a public repository)
+(make sure that env.py is added to .gitignore if you are pushing to a public repository)  
 6. Run the app:
 ```
 python3 app.py
