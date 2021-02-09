@@ -9,17 +9,19 @@
 	</div>
 	<div class="row custom-padding2">
 		<div class="col s12 m6 custom-padding offset-m3 center">
-{% for searchresult in searchresults.results %}
-    {% if searchresult['title'] %}
-			<h5>
-				<a href="{{ url_for('tvshow', show_id=searchresult['id']) }}" class="custom-text">{{ searchresult['title'] }}</a>
-					<br>
-					<hr>	
-			</h5>
-    {% else %}
-					<h5 class="custom-test">Sorry, there are no results.</h5>
-    {% endif %}    
-{% endfor %}
+{% if searchresults.results|length %}            
+    {% for searchresult in searchresults.results %}
+                <h5>
+                    <a href="{{ url_for('tvshow', show_id=searchresult['id']) }}" class="custom-text">{{ searchresult['title'] }}</a>
+                        <br>
+                        <hr>	
+                </h5>
+    {% endfor %}
+{% else %}
+                <h5 class="custom-text">
+                   Sorry, there are no results	
+                </h5>
+{% endif %}
 				</div>
 			</div>
 			<div class="row">

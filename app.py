@@ -34,14 +34,14 @@ def index():
 
 @app.route("/search/<searchterm>")
 def search(searchterm):
-   
-        # Get data from imdb API
-        response = requests.get('https://imdb-api.com/API/SearchSeries/',
-                                {"apikey": os.environ.get("APIKEY"),
-                                 "expression": searchterm})
-        searchresults = response.json()
-        return render_template('search.html', searchresults=searchresults)
-   
+
+    # Get data from imdb API
+    response = requests.get('https://imdb-api.com/API/SearchSeries/',
+                            {"apikey": os.environ.get("APIKEY"),
+                                "expression": searchterm})
+    searchresults = response.json()
+    return render_template('search.html', searchresults=searchresults)
+
 
 # A redirect in order to keep the search term
 # and feed it into the search function

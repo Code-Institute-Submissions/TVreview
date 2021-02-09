@@ -102,7 +102,7 @@
 							<h4>Reviews:</h4>
 						</span>
           {% for x in reviews %}
-          {% if x.review %}
+            {% if x.review|length %}
             
 						<h5 class="review-text margin-top1">{{ x.review }}</h5>
 						<br>
